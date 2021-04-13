@@ -1,0 +1,94 @@
+.login {
+    width: 100%;
+    margin-top: 80px;
+    padding: 60px 0;
+}
+.form-login {
+    display: flex;
+    justify-content: center;
+}
+.form {
+    width: 450px;
+    min-height: 100px;
+}
+.heading{
+    font-size: 40px;
+    line-height: 38px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.form .desc {
+    margin: 20px 0;
+    display: inline-block;
+    color: #000;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.form-group {
+    display: flex;
+    margin-bottom: 16px;
+    flex-direction: column;
+}
+
+  
+.form-label,
+.form-message {
+    text-align: left;
+  }
+  
+.form-label {
+    font-weight: 700;
+    padding-bottom: 6px;
+    line-height: 1.8rem;
+    font-size: 16px;
+}
+  
+.form-control {
+    height: 40px;
+    padding: 22px 18px;
+    border: 1px solid #b3b3b3;
+    border-radius: 2px;
+    outline: none;
+    font-size: 16px;
+}
+  
+.form-control:hover {
+    border-color: #1dbfaf;
+}
+  
+.form-group.invalid .form-control {
+    border-color: #f33a58;
+}
+  
+.form-group.invalid .form-message {
+    color: #f33a58;
+}
+  
+.form-message {
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    padding: 4px 0 0;
+}
+
+.reason {
+    width: 450px;
+    min-height: 100px;
+}
+.reason .desc {
+    font-size: 18px;
+    margin: 20px 0 16px 0;
+}
+.reason .content {
+    margin-left: 12px;
+}
+
+.reason .content ul li {
+    font-size: 18px;
+    display: flex;
+    padding: 8px 0;
+}
+.reason .content ul li i{
+    margin-right: 12px;
+}
+
