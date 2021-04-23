@@ -14,6 +14,7 @@ app.use(cors());
 
 app.use('/user', require('./routes/user.router'));
 app.use('/api', require('./routes/product.router'));
+app.use('/api', require('./routes/payment.router'));
 
 const PORT = process.env.PORT || 5000;
 const URL = process.env.MONGO_URL;
