@@ -1,21 +1,19 @@
 .login {
     width: 100%;
-    margin-top: 80px;
-    padding: 60px 0;
-}
-.form-login {
-    display: flex;
-    justify-content: center;
+    padding-top: 60px;
 }
 .form {
     width: 450px;
     min-height: 100px;
 }
-.heading{
+.form .heading{
     font-size: 40px;
     line-height: 38px;
     font-weight: 600;
     text-transform: uppercase;
+}
+.heading-register {
+    margin-bottom: 10px;
 }
 .form .desc {
     margin: 20px 0;
@@ -43,7 +41,9 @@
     line-height: 1.8rem;
     font-size: 16px;
 }
-  
+.form .form-submit i {
+    margin-left: 4px;
+}
 .form-control {
     height: 40px;
     padding: 22px 18px;
@@ -60,15 +60,17 @@
 .form-group.invalid .form-control {
     border-color: #f33a58;
 }
+
   
-.form-group.invalid .form-message {
+/* .form-group.invalid .form-message {
     color: #f33a58;
-}
+} */
   
 .form-message {
-    font-size: 1.2rem;
+    font-size: 12px;
     line-height: 1.6rem;
     padding: 4px 0 0;
+    color: #f33a58;
 }
 
 .reason {
@@ -82,7 +84,12 @@
 .reason .content {
     margin-left: 12px;
 }
-
+.reason .heading{
+    font-size: 40px;
+    line-height: 38px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
 .reason .content ul li {
     font-size: 18px;
     display: flex;
@@ -92,3 +99,30 @@
     margin-right: 12px;
 }
 
+.btn-register i{
+    margin-left: 8px;
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+    .btn-table-mobile,
+    .form,   
+    .reason {
+        width: 100%;
+    }
+    .btn-table-mobile {
+        margin-bottom: 40px;
+    }
+}
+@media (max-width: 740px)  {
+    .btn-table-mobile,
+    .form,   
+    .reason {
+        width: 100%;
+    }   
+    .btn-table-mobile {
+        margin-bottom: 40px;
+    }
+    .app-content {
+        margin: 0 14px;
+    }
+}

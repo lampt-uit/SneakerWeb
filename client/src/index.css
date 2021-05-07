@@ -15,18 +15,6 @@ code {
     monospace;
 }
 
-a {
-  text-decoration: none;
-}
-ul li {
-  list-style: none;
-}
-button {
-  border: none;
-  outline: none;
-  background: transparent;
-  cursor: pointer;
-}
 
 
 /* ---Grid--- */
