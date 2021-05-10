@@ -16,17 +16,17 @@ function Rating() {
 	return (
 		<div className='rating'>
 			<div className='star'>
-				<i class='far fa-star'></i>
-				<i class='far fa-star'></i>
-				<i class='far fa-star'></i>
-				<i class='far fa-star'></i>
-				<i class='far fa-star'></i>
+				<i className='far fa-star'></i>
+				<i className='far fa-star'></i>
+				<i className='far fa-star'></i>
+				<i className='far fa-star'></i>
+				<i className='far fa-star'></i>
 				{/* <div className='star-1' style={style_star}>
-					<i class='fas fa-star'></i>
-					<i class='fas fa-star'></i>
-					<i class='fas fa-star'></i>
-					<i class='fas fa-star'></i>
-					<i class='fas fa-star'></i>
+					<i className='fas fa-star'></i>
+					<i className='fas fa-star'></i>
+					<i className='fas fa-star'></i>
+					<i className='fas fa-star'></i>
+					<i className='fas fa-star'></i>
 				</div> */}
 			</div>
 		</div>

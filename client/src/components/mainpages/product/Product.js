@@ -44,7 +44,7 @@ function Product() {
 					<button className='home_filter-button'>Phổ biến</button>
 					<button className='select_price' onClick={onClickOpen}>
 						<span className='select_label'>Giá</span>
-						<i class='fas fa-chevron-down'></i>
+						<i className='fas fa-chevron-down'></i>
 
 						<ul
 							ref={dropMenuRef}

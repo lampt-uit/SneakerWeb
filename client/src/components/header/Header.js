@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { GlobalState } from '../../GlobalState';
 import { Link } from 'react-router-dom';
 import Logo from '../../public/images/logo_vatino.png';
 import './header.css';
 
 const Header = () => {
-	const [click, setClick] = useState(false);
+	const state = useContext(GlobalState);
+	// console.log(state);
+	const [user] = state.userAPI.userInfo;
+	const [isLogged] = state.userAPI.isLogged;
 
 	return (
 		<div className='header'>
 			<div className='header-top'>
 				<ul>
-					<li>
-						<Link to='/login'>Login</Link>
-					</li>
-					<li>
-						<Link to='/register'>Register</Link>
-					</li>
+					{isLogged ? (
+						<p>{user.name}</p>
+					) : (
+						<>
+							{' '}
+							<li>
+								<Link to='/login'>Login</Link>
+							</li>
+							<li>
+								<Link to='/register'>Register</Link>
+							</li>
+						</>
+					)}
 				</ul>
 			</div>
 			<div className='header-bottom'>
