@@ -8,15 +8,8 @@ const userController = {
 			const { name, email, password } = req.body;
 
 			const user = await Users.findOne({ email });
-
 			if (user)
 				return res.status(400).json({ msg: 'The email already exists.' });
-
-			if (password.length < 6) {
-				return res
-					.status(400)
-					.json({ msg: 'Password is least 6 character long.' });
-			}
 
 			const hashPassword = await bcrypt.hash(password, 10);
 			const newUser = new Users({
@@ -37,9 +30,9 @@ const userController = {
 				maxAge: 7 * 24 * 60 * 60 * 1000 //7day => ms
 			});
 
-			res.json({ accesstoken });
+			// res.json({ accesstoken });
 
-			// res.status(200).json({ message: 'Create user successfully !' });
+			res.status(200).json({ message: 'Create user successfully !' });
 		} catch (error) {
 			return res.status(500).json({ msg: error.msg });
 		}

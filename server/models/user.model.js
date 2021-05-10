@@ -8,6 +8,11 @@ const userSchema = new mongoose.Schema(
 		phone: { type: String, default: '' },
 		address: { type: String, default: '' },
 		role: { type: Number, default: 0 },
+		avatar: {
+			type: String,
+			default:
+				'https://res.cloudinary.com/lampt/image/upload/v1620639420/utils/avatar_cugq40_jnf6l1.png'
+		},
 		cart: { type: Array, default: [] }
 	},
 	{
