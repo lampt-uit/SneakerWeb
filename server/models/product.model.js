@@ -26,11 +26,19 @@ const productSchema = mongoose.Schema(
 			type: String,
 			required: true
 		},
+		size: {
+			type: Array,
+			default: []
+		},
 		category: {
 			type: String,
 			required: true
 		},
 		sold: {
+			type: Number,
+			default: 0
+		},
+		stock: {
 			type: Number,
 			default: 0
 		}

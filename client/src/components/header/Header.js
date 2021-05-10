@@ -1,44 +1,14 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom'
-import './Header.css'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Logo from '../../public/images/logo_vatino.png';
+import './header.css';
 
 const Header = () => {
-
-	const [click, setClick] = useState(false)
-	const closeMenu = () => {
-		setClick(!click)
-	}
-	const handleClick = () => {
-		setClick(!click)
-	}
-
-	
+	const [click, setClick] = useState(false);
 
 	return (
 		<div className='header'>
-			<div className="header-table-mobile">
-				
-				<div className="icon" onClick={handleClick}>
-					<i class= {click?"fas fa-times":"fas fa-bars"}></i>
-				</div>
-				<div className={click ? "menu-nav active": "menu-nav"}>
-					<ul>
-						<li><Link to='/product' onClick={closeMenu}>Nam</Link></li>
-						<li><Link to='/product' onClick={closeMenu}>Nữ</Link></li>
-						<li><Link to='/product' onClick={closeMenu}>Trẻ em</Link></li>
-						<li><Link to='/product' onClick={closeMenu}>Nhãn hiệu khác</Link></li>
-						<li><Link to='/login' onClick={closeMenu}>Login</Link></li>
-					</ul>
-				</div>
-				<img src="http://mauweb.monamedia.net/trueshoes/wp-content/uploads/2018/03/logo-mona.png" alt="" width='80'/>
-				<div className="cart">
-					<i className="fas fa-shopping-cart"></i>
-					<div className="cart__total">
-						<span>0</span>
-					</div>
-				</div>	
-			</div>
-			<div className="header-top">
+			<div className='header-top'>
 				<ul>
 					<li>
 						<Link to='/login'>Login</Link>
@@ -46,39 +16,45 @@ const Header = () => {
 					<li>
 						<Link to='/register'>Register</Link>
 					</li>
-					<li>
-						<Link to='/'>Home</Link>
-					</li>
 				</ul>
 			</div>
 			<div className='header-bottom'>
-				<div className='header-bottom_logo'>
-					<img
-						src='http://mauweb.monamedia.net/trueshoes/wp-content/uploads/2018/03/logo-mona.png'
-						alt=''
-						width='80'
-					/>
-				</div>
+				<Link to='/' className='header-bottom_logo'>
+					<img src={Logo} alt='' width='100' />
+				</Link>
 				<div className='header-bottom_nav'>
 					<ul>
-						<li><Link to='/product'>Nam</Link></li>
-						<li><Link to='/product'>Nữ</Link></li>
-						<li><Link to='/product'>Trẻ em</Link></li>
-						<li><Link to='/product'>Nhãn hiệu khác</Link></li>
+						<li>
+							<Link to='/product'>Nike</Link>
+						</li>
+						<li>
+							<Link to='/product'>Puma</Link>
+						</li>
+						<li>
+							<Link to='/product'>Converse</Link>
+						</li>
+						<li>
+							<Link to='/product'>Adidas</Link>
+						</li>
+						<li>
+							<Link to='/product'>Vans</Link>
+						</li>
+						<li>
+							<Link to='/product'>Thương hiệu khác</Link>
+						</li>
 					</ul>
 				</div>
-				<div className="hearder-bottom_search">
-					<div className="form-input">
-						<input type="text" placeholder='Tìm kiếm'/>
-						<i className="fas fa-search"></i>
+				<div className='hearder-bottom_search'>
+					<div className='form-input'>
+						<input type='text' placeholder='Tìm kiếm' />
+						<i className='fas fa-search'></i>
 					</div>
-					<div className="icon-cart">
-						<i className="fas fa-shopping-cart"></i>
-						<div className="cart__total">
+					<Link to='/cart' className='icon-cart'>
+						<i className='fas fa-shopping-cart'></i>
+						<div className='cart__total'>
 							<span>0</span>
 						</div>
-
-					</div>
+					</Link>
 				</div>
 			</div>
 		</div>
