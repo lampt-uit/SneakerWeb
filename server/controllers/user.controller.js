@@ -51,15 +51,11 @@ const userController = {
 			const user = await Users.findOne({ email });
 
 			if (!user)
-				return res
-					.status(400)
-					.json({ message: 'Email or password is incorrect :(' });
+				return res.status(400).json({ message: "User doesn't exists." });
 
 			const isMatch = await bcrypt.compare(password, user.password);
 			if (!isMatch)
-				return res
-					.status(400)
-					.json({ message: 'Email or password is incorrect :(' });
+				return res.status(400).json({ message: 'Password is incorrect.' });
 
 			const accesstoken = createAccessToken({ id: user._id });
 			const refreshtoken = createRefreshToken({ id: user._id });
@@ -71,9 +67,7 @@ const userController = {
 				maxAge: 7 * 24 * 60 * 60 * 1000 //7day => ms
 			});
 
-			res.json({ accesstoken });
-
-			// res.status(200).json({ message: 'Login successfully !' });
+			res.status(200).json({ message: 'Login successfully !' });
 		} catch (error) {
 			return res.status(500).json({ msg: error.msg });
 		}
