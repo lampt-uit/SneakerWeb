@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -10,7 +9,6 @@ import Button from '../utils/Button/Button';
 
 function Register() {
 	const [state, setState] = useState({ err: '', success: '' });
-	const history = useHistory();
 	const { err, success } = state;
 	const formik = useFormik({
 		initialValues: {
@@ -35,10 +33,11 @@ function Register() {
 		onSubmit: async (values, { resetForm }) => {
 			try {
 				const res = await axios.post('/user/register', { ...values });
-				console.log(res);
+				// console.log(res);
 				setState({ err: '', success: res.data.message });
+				localStorage.setItem('firstLogin', true);
+				window.location.href = '/';
 				resetForm();
-				history.push('/');
 			} catch (error) {
 				error.response.data.msg &&
 					setState({ err: error.response.data.msg, success: '' });
