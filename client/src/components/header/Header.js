@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import axios from 'axios';
+
 import { GlobalState } from '../../GlobalState';
 import { Link } from 'react-router-dom';
 import Logo from '../../public/images/logo_vatino.png';
@@ -10,12 +12,40 @@ const Header = () => {
 	const [user] = state.userAPI.userInfo;
 	const [isLogged] = state.userAPI.isLogged;
 
+	const handleLogout = async () => {
+		try {
+			await axios.get('/user/logout');
+			localStorage.removeItem('firstLogin');
+			window.location.href = '/';
+		} catch (error) {
+			window.location.href = '/';
+		}
+	};
+
 	return (
 		<div className='header'>
 			<div className='header-top'>
 				<ul>
 					{isLogged ? (
-						<p>{user.name}</p>
+						<li className='drop-nav'>
+							<Link to='#' className='avatar'>
+								<img src={user.avatar} alt='/' />
+								&nbsp;
+								<span className='name'>
+									{user.name} <i className='fas fa-angle-down'></i>
+								</span>
+							</Link>
+							<ul className='dropdown'>
+								<li>
+									<Link to='/profile'>Profile</Link>
+								</li>
+								<li>
+									<Link to='/logout' onClick={handleLogout}>
+										Logout
+									</Link>
+								</li>
+							</ul>
+						</li>
 					) : (
 						<>
 							{' '}

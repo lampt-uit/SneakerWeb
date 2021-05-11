@@ -82,7 +82,7 @@
 .icon-cart {
 	margin-left: 18px;
 	font-size: 20px;
-	color:#000;
+	color: #000;
 	position: relative;
 }
 
@@ -94,12 +94,13 @@
 	height: 22px;
 	width: 22px;
 	border-radius: 50%;
-	background-color: red;
+	background-color: #576574;
 }
 .cart__total span {
 	position: absolute;
-	top: 50%;
-	left: 50%;
+	color: wheat;
+	top: 46%;
+	left: 52%;
 	font-size: 16px;
 	transform: translate(-50%, -50%);
 }
@@ -169,4 +170,50 @@
 		left: 14px;
 		color: #fff;
 	}
+}
+
+/* Profile */
+
+.drop-nav {
+	position: relative;
+}
+
+.drop-nav a {
+	text-transform: capitalize;
+	overflow: hidden;
+}
+
+.drop-nav .dropdown {
+	position: absolute;
+	top: 40px;
+	background: #95a5a6;
+	width: 100%;
+	display: none;
+	z-index: 99;
+}
+.drop-nav .dropdown li {
+	display: block;
+	color: white;
+}
+.drop-nav .dropdown li:hover {
+	background: #576574;
+}
+.drop-nav .avatar {
+	margin-right: 5px;
+}
+
+.drop-nav .avatar .name {
+	display: inline-block;
+	transform: translateY(-4px);
+}
+.drop-nav .avatar img {
+	width: 30px;
+	height: 30px;
+	transform: translateY(5px);
+	border-radius: 50%;
+	border: 2px solid black;
+}
+
+.drop-nav:hover .dropdown {
+	display: block;
 }
