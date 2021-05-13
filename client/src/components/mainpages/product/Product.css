@@ -67,68 +67,17 @@
 
 .select_price {
 	margin-left: auto;
-	position: relative;
-	height: 34px;
-	width: 200px;
+	height: 38px;
+	width: 180px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	border: 1px solid #ebedee;
-}
-.select_price span {
+	outline: none;
 	font-size: 18px;
 	font-weight: 600;
 	color: #000;
-	padding-left: 16px;
-}
-
-.select_price i {
-	font-size: 10px;
-	padding-right: 16px;
-}
-
-/* .select_price:hover .price-list {
-    display: block;  
-} */
-.select_price::before {
-	content: '';
-	top: 28px;
-	left: 0;
-	height: 12px;
-	width: 100%;
-	position: absolute;
-}
-
-.price-list {
-	position: absolute;
-	top: 38px;
-	left: 0;
-	right: 0;
-	box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
-	background-color: #fff;
-	z-index: 1;
-	display: block;
-	opacity: 0;
-	visibility: hidden;
-	transform: translateY(-6px);
-	transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
-}
-
-.price-list.active {
-	opacity: 1;
-	visibility: visible;
-	transform: translateY(0);
-}
-
-.price-list .price-item:hover {
-	background-color: #ebedee;
-}
-.price-list .price-item .price-link {
-	display: block;
-	color: #000;
-	text-align: start;
-	padding: 12px;
-	font-size: 16px;
+	padding-left: 5px;
 }
 
 .home-product-item {
