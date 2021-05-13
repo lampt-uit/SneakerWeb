@@ -22,8 +22,13 @@ const productSchema = mongoose.Schema(
 			type: String,
 			required: true
 		},
+		content: {
+			type: Array,
+			default: []
+		},
 		image: {
-			type: String,
+			type: Array,
+			default: [],
 			required: true
 		},
 		size: {
@@ -41,7 +46,12 @@ const productSchema = mongoose.Schema(
 		stock: {
 			type: Number,
 			default: 0
-		}
+		},
+		numReviews: {
+			type: Number,
+			default: 0
+		},
+		rating: { type: Number, default: 0 }
 	},
 	{
 		timestamps: true
