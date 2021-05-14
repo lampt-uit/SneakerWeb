@@ -11,6 +11,7 @@ const Header = () => {
 	// console.log(state);
 	const [user] = state.userAPI.userInfo;
 	const [isLogged] = state.userAPI.isLogged;
+	const [cart] = state.productAPI.cart;
 
 	const handleLogout = async () => {
 		try {
@@ -93,7 +94,7 @@ const Header = () => {
 					<Link to='/cart' className='icon-cart'>
 						<i className='fas fa-shopping-cart'></i>
 						<div className='cart__total'>
-							<span>0</span>
+							<span>{cart.length}</span>
 						</div>
 					</Link>
 				</div>

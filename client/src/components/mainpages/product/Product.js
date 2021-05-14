@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { GlobalState } from '../../../GlobalState';
@@ -8,33 +8,10 @@ function Product() {
 	const state = useContext(GlobalState);
 	// console.log(state);
 	const [products] = state.productAPI.products;
-	const [category, setCategory] = state.productAPI.category;
+	// const [category, setCategory] = state.productAPI.category;
 	const [sort, setSort] = state.productAPI.sort;
-	const [search, setSearch] = state.productAPI.search;
+	// const [search, setSearch] = state.productAPI.search;
 	// console.log(products);
-
-	const [isOpen, setIsOpen] = useState(false);
-	const dropMenuRef = useRef(null);
-
-	const onClickOpen = () => {
-		setIsOpen(!isOpen);
-	};
-	useEffect(() => {
-		const pageClickEvent = (e) => {
-			if (
-				dropMenuRef.current !== null &&
-				!dropMenuRef.current.contains(e.target)
-			) {
-				setIsOpen(!isOpen);
-			}
-		};
-		if (isOpen) {
-			window.addEventListener('click', pageClickEvent);
-		}
-		return () => {
-			window.removeEventListener('click', pageClickEvent);
-		};
-	}, [isOpen]);
 
 	return (
 		<div className='home_product mrt mrb'>
