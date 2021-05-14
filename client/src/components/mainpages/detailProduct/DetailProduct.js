@@ -8,6 +8,7 @@ function DetailProduct() {
 	const state = useContext(GlobalState);
 	// console.log(state);
 	const [products] = state.productAPI.products;
+	const addToCart = state.productAPI.addToCart;
 	const { id } = useParams();
 
 	const details = products.filter((product) => {
@@ -91,7 +92,7 @@ function DetailProduct() {
 											))}
 										</div>
 									</div>
-									<Link to='/cart'>
+									<Link to='/cart' onClick={() => addToCart(product._id)}>
 										<Button text='Thêm vào giỏ hàng' />
 									</Link>
 								</div>
