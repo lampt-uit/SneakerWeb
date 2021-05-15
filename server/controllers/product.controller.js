@@ -55,6 +55,14 @@ const productController = {
 			return res.status(500).json({ msg: error.message });
 		}
 	},
+	getProduct: async (req, res) => {
+		try {
+			const product = await Products.findById(req.params.id);
+			res.json(product);
+		} catch (error) {
+			return res.status(500).json({ msg: error.message });
+		}
+	},
 	createProduct: async (req, res) => {
 		try {
 			const image = 'http://localhost:4000/' + req.file.path;

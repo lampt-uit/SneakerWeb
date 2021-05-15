@@ -24,9 +24,22 @@
 .product_cart img {
 	width: 150px;
 }
+.product_cart .content span {
+	color: crimson;
+}
 
 .product_cart2 {
 	margin-left: 100px;
+	margin-top: 20px;
+}
+.product_cart2 h3 {
+	margin-top: 50px;
+	margin-left: 80px;
+	color: crimson;
+}
+.product_cart2 .select {
+	padding: 5px;
+	outline: none;
 }
 .address {
 	border: 8px solid #bdc3c7;
@@ -53,4 +66,32 @@
 
 .order h2 {
 	text-align: right;
+	color: crimson;
+}
+.amount {
+	margin-top: 20px;
+}
+.amount span {
+	color: crimson;
+	padding: 0 20px;
+}
+.amount button {
+	width: 40px;
+	height: 40px;
+	border: 1px solid #777;
+	border-radius: 5px;
+}
+
+.detail {
+	position: relative;
+}
+.delete {
+	color: crimson;
+	font-weight: 700;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.delete:hover {
+	cursor: pointer;
 }
