@@ -134,57 +134,6 @@
 .home-product-item {
 	margin-top: 12px;
 }
-
-.home-product-item {
-	display: block;
-	transition: transform linear 0.1s;
-	box-shadow: 0 1px 2px rgb(0 0 0 / 50%);
-}
-
-.home-product-item:hover {
-	transform: translateY(-4px);
-}
-
-.home-product-item .home-product-item_img {
-	width: 100%;
-}
-
-.row1 {
-	display: flex;
-	justify-content: space-between;
-}
-
-.row2 {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 10px;
-}
-
-.row2 .reviews .reviews_qty {
-	font-size: 12px;
-}
-
-.row2 .buy {
-	padding: 8px;
-	border: 1px solid #1c303d;
-	border-radius: 5px;
-}
-.detail {
-	padding: 5px;
-	font-size: 14px;
-	font-weight: 500;
-}
-.home-product-item .home-product-item_name {
-	text-transform: uppercase;
-	color: #000;
-	font-weight: 500;
-}
-
-.home-product-item .home-product-item_price {
-	color: #000;
-	color: crimson;
-}
-
 @keyframes fadeIn {
 	from {
 		opacity: 0;
