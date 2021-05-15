@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { GlobalState } from '../../../GlobalState';
@@ -7,10 +7,58 @@ import './Cart.css';
 
 function Cart() {
 	const state = useContext(GlobalState);
-	const [cart] = state.productAPI.cart;
-	// console.log(cart);
+	const [cart, setCart] = state.userAPI.cart;
 	const [userInfo] = state.userAPI.userInfo;
-	console.log(userInfo);
+	const [total, setTotal] = useState(0);
+
+	useEffect(() => {
+		const getTotal = () => {
+			const total = cart.reduce((prev, item) => {
+				return prev + item.price * item.count;
+			}, 0);
+			setTotal(total);
+		};
+		getTotal();
+	}, [cart]);
+
+	const increase = (id) => {
+		cart.forEach((item) => {
+			if (item._id === id) {
+				item.count += 1;
+			}
+		});
+		setCart([...cart]);
+	};
+
+	const decrease = (id) => {
+		cart.forEach((item) => {
+			if (item._id === id) {
+				item.count === 1 ? (item.count = 1) : (item.count -= 1);
+			}
+		});
+		setCart([...cart]);
+	};
+
+	const remove = (id) => {
+		if (window.confirm('Bạn có muốn xóa sản phẩm này khỏi giỏ hàng ?')) {
+			cart.forEach((item, index) => {
+				if (item._id === id) {
+					cart.splice(index, 1);
+				}
+			});
+			setCart([...cart]);
+		}
+	};
+
+	if (cart.length === 0) {
+		return (
+			<h2
+				style={{ textAlign: 'center', fontSize: '5rem', paddingTop: '100px' }}
+			>
+				CART EMPTY
+			</h2>
+		);
+	}
 	return (
 		<div className='detail_cart'>
 			<div className='grid wide'>
@@ -22,10 +70,10 @@ function Cart() {
 					<div className='col l-8'>
 						{cart.map((product) => (
 							<div
-								className='row'
+								className='row detail'
 								style={{ border: '1px solid #bdc3c7', marginBottom: '5px' }}
 							>
-								<div className='col l-6'>
+								<div className='col l-8'>
 									<div className='product_cart'>
 										<img src={product.image[0]} alt='' />
 										<div className='content'>
@@ -35,16 +83,25 @@ function Cart() {
 										</div>
 									</div>
 								</div>
-								<div className='col l-6'>
+								<div className='col l-4'>
 									<div className='product_cart2'>
-										<span>Chon size</span>
-										<select>
+										<span>Chọn Size: </span>
+										<select className='select'>
 											{product.size.map((size) => (
 												<option value={size}>{size}</option>
 											))}
 										</select>
+										<div className='amount'>
+											<button onClick={() => decrease(product._id)}>-</button>
+											<span>{product.count}</span>
+											<button onClick={() => increase(product._id)}>+</button>
+										</div>
+										<h3>$ {product.price * product.count}</h3>
 									</div>
 								</div>
+								<span className='delete' onClick={() => remove(product._id)}>
+									X
+								</span>
 							</div>
 						))}
 					</div>
@@ -54,37 +111,37 @@ function Cart() {
 							<form className='form'>
 								<div className='form-group'>
 									<label htmlFor='name' className='form-label'>
-										Họ và tên
+										Họ và tên <span style={{ color: 'crimson' }}>*</span>
 									</label>
 									<input
 										id='name'
 										name='name'
 										type='text'
-										value={userInfo.name}
+										defaultValue={userInfo.name}
 										className='form-control'
 									/>
 								</div>
 								<div className='form-group'>
 									<label htmlFor='phone' className='form-label'>
-										Số điện thoại
+										Số điện thoại <span style={{ color: 'crimson' }}>*</span>
 									</label>
 									<input
 										id='phone'
 										name='phone'
 										type='text'
-										value={userInfo.phone}
+										defaultValue={userInfo.phone}
 										className='form-control'
 									/>
 								</div>
 								<div className='form-group'>
 									<label htmlFor='address' className='form-label'>
-										Địa chỉ
+										Địa chỉ <span style={{ color: 'crimson' }}>*</span>
 									</label>
 									<input
 										id='address'
 										name='name'
 										type='address'
-										value={userInfo.address}
+										defaultValue={userInfo.address}
 										className='form-control'
 									/>
 								</div>
@@ -109,7 +166,7 @@ function Cart() {
 							<p>Hình thức giao hàng: Giao hành nhanh</p>
 							<p>Chương trình khuyến mãi: Không</p>
 
-							<h2>Tổng tiền: $ 999</h2>
+							<h2>Tổng tiền: $ {total}</h2>
 						</div>
 						<Button text='Thanh toán' />
 					</div>

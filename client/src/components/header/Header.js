@@ -9,9 +9,9 @@ import './header.css';
 const Header = () => {
 	const state = useContext(GlobalState);
 	// console.log(state);
-	const [user] = state.userAPI.userInfo;
+	const [userInfo] = state.userAPI.userInfo;
 	const [isLogged] = state.userAPI.isLogged;
-	const [cart] = state.productAPI.cart;
+	const [cart] = state.userAPI.cart;
 
 	const handleLogout = async () => {
 		try {
@@ -30,10 +30,10 @@ const Header = () => {
 					{isLogged ? (
 						<li className='drop-nav'>
 							<Link to='#' className='avatar'>
-								<img src={user.avatar} alt='/' />
+								<img src={userInfo.avatar} alt='/' />
 								&nbsp;
 								<span className='name'>
-									{user.name} <i className='fas fa-angle-down'></i>
+									{userInfo.name} <i className='fas fa-angle-down'></i>
 								</span>
 							</Link>
 							<ul className='dropdown'>

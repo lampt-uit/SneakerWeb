@@ -8,7 +8,7 @@ function DetailProduct() {
 	const state = useContext(GlobalState);
 	// console.log(state);
 	const [products] = state.productAPI.products;
-	const addToCart = state.productAPI.addToCart;
+	const addToCart = state.userAPI.addToCart;
 	const { id } = useParams();
 
 	const details = products.filter((product) => {

@@ -38,6 +38,7 @@ router.route('/products').get(productController.getProducts).post(
 );
 router
 	.route('/product/:id')
+	.get(productController.getProduct)
 	.delete(productController.deleteProduct)
 	.put(upload.single('image'), productController.updateProduct);
 
