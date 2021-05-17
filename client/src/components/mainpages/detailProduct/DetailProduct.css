@@ -6,14 +6,14 @@
 	position: relative;
 }
 .home-detail-img {
-	width: 100%;
-	height: 100%;
-	text-align: center;
+	width: 600px;
+	height: 500px;
+	margin: 0 auto;
 }
 .home-detail-img img {
 	width: 100%;
-	height: 500px;
-	object-fit: cover;
+	height: 100%;
+	object-fit: fill;
 	border: 1px solid #c8d6e5;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .home-detail-description {
-	margin-top: 10px;
+	margin-top: 30px;
 }
 .title {
 	font-size: 28px;
@@ -50,6 +50,7 @@
 	font-size: 22px;
 	font-weight: 600;
 	margin-bottom: 10px;
+	text-transform: uppercase;
 }
 .text-content .text {
 	font-size: 16px;
@@ -63,12 +64,10 @@
 	list-style: disc;
 }
 
-.detail-slidebar {
-	padding: 30px 20px;
-}
 .detail-slidebar .detail-name {
 	font-weight: 600;
 	font-size: 28px;
+	text-transform: uppercase;
 }
 .detail-slidebar .detail-price {
 	font-weight: 400;
@@ -80,8 +79,12 @@
 .detail-size .name-size {
 	font-size: 20px;
 	font-weight: 500;
+	text-transform: uppercase;
+	margin-bottom: 10px;
 }
-
+.container-size {
+	margin-bottom: 20px;
+}
 .container-size button {
 	width: 60px;
 	height: 40px;
@@ -118,4 +121,24 @@
 	height: 300px;
 	object-fit: cover;
 	border: 1px solid #c8d6e5;
+}
+
+
+.promotion {
+	display: flex;
+	margin-top: 20px;
+}
+.promotion .promotion-icon {
+	align-self: center;
+	margin-right: 4px;
+	color: red;
+}
+.promotion .promotion-content  {
+	line-height: 24px;
+	font-size: 16px;
+}
+.promotion .promotion-content .promotion-link {
+	border-bottom: 1px solid #4d4a4a;
+	color: #000;
+	
 }
