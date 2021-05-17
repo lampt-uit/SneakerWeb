@@ -5,7 +5,7 @@ import Register from './auth/Register';
 import Product from './product/Product';
 import DetailProduct from './detailProduct/DetailProduct';
 import { Switch, Route } from 'react-router-dom';
-import NotFound from './utils/Not_Found/NotFound';
+// import NotFound from './utils/Not_Found/NotFound';
 import Cart from './cart/Cart';
 const Pages = () => {
 	return (
@@ -16,7 +16,7 @@ const Pages = () => {
 			<Route path='/product' exact component={Product}></Route>
 			<Route path='/product/:id' exact component={DetailProduct}></Route>
 			<Route path='/cart' exact component={Cart}></Route>
-			<Route path='*' exact component={NotFound}></Route>
+			{/* <Route path='*' exact component={NotFound}></Route> */}
 		</Switch>
 	);
 };

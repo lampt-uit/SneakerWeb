@@ -8,6 +8,7 @@ import './Cart.css';
 function Cart() {
 	const state = useContext(GlobalState);
 	const [cart, setCart] = state.userAPI.cart;
+	const [callback, setCallback] = state.userAPI.callback;
 	const [userInfo] = state.userAPI.userInfo;
 	const [total, setTotal] = useState(0);
 
@@ -47,6 +48,8 @@ function Cart() {
 				}
 			});
 			setCart([...cart]);
+			console.log(cart);
+			setCallback(!callback);
 		}
 	};
 
