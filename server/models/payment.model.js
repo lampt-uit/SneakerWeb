@@ -3,15 +3,14 @@ const mongoose = require('mongoose');
 const paymentSchema = new mongoose.Schema(
 	{
 		user_id: {
-			type: String,
-			required: true
+			type: String
 		},
 		name: {
 			type: String,
 			required: true
 		},
 		phone: {
-			type: Number,
+			type: String,
 			required: true
 		},
 		address: {
@@ -25,6 +24,10 @@ const paymentSchema = new mongoose.Schema(
 		status: {
 			type: Boolean,
 			default: false
+		},
+		note: {
+			type: String,
+			default: ''
 		}
 	},
 	{

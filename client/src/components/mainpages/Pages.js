@@ -8,6 +8,8 @@ import { Switch, Route } from 'react-router-dom';
 // import NotFound from './utils/Not_Found/NotFound';
 import Cart from './cart/Cart';
 import Profile from './profile/Profile';
+import History from './history/OrderHistory';
+import HistoryDetail from './history/OrderDetails';
 const Pages = () => {
 	return (
 		<Switch>
@@ -18,6 +20,8 @@ const Pages = () => {
 			<Route path='/product/:id' exact component={DetailProduct}></Route>
 			<Route path='/cart' exact component={Cart}></Route>
 			<Route path='/profile' exact component={Profile}></Route>
+			<Route path='/history' exact component={History}></Route>
+			<Route path='/history/:id' exact component={HistoryDetail}></Route>
 			{/* <Route path='*' exact component={NotFound}></Route> */}
 		</Switch>
 	);

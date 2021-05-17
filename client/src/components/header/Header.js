@@ -39,11 +39,15 @@ const Header = () => {
 							</Link>
 							<ul className='dropdown'>
 								<li>
-									<Link to='/profile'>Profile</Link>
+									<Link to='/profile'>Thông tin</Link>
 								</li>
 								<li>
+									<Link to='/history'>Đơn hàng</Link>
+								</li>
+
+								<li>
 									<Link to='/logout' onClick={handleLogout}>
-										Logout
+										Đăng xuất
 									</Link>
 								</li>
 							</ul>
