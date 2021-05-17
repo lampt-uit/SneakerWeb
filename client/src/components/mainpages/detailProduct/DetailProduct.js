@@ -19,13 +19,13 @@ function DetailProduct() {
 			{details.map((product) => (
 				<div className='home-detail mrt mrb'>
 					<div className='grid wide'>
+						<div className='breadcrumb'>
+							<Link to='#'>
+								<i className='fas fa-arrow-left'></i>Trở lại
+							</Link>
+						</div>
 						<div className='row'>
 							<div className='col l-8 m-12 c-12'>
-								<div className='breadcrumb'>
-									<Link to='#'>
-										<i className='fas fa-arrow-left'></i>Trở lại
-									</Link>
-								</div>
 								<div className='home-detail-content'>
 									<div className='home-detail-item'>
 										<div className='home-detail-img'>
@@ -95,6 +95,25 @@ function DetailProduct() {
 									<Link to='/cart' onClick={() => addToCart(product._id)}>
 										<Button text='Thêm vào giỏ hàng' />
 									</Link>
+									<div className="promotion">
+										<div className="promotion-icon">
+											<i class="fas fa-truck"></i>
+										</div>
+										<div className="promotion-content">
+											<Link className="promotion-link">Learn More</Link>
+											<p className="promotion-text">Miễn phí giao hàng trên 10$</p>		
+										</div>
+									</div>
+									<div className="promotion">
+										<div className="promotion-icon">
+											<i class="fas fa-undo-alt"></i>
+										</div>
+										<div className="promotion-content">
+											<Link className="promotion-link">Trả hàng dễ dàng</Link>
+											<p className="promotion-text">Không đúng kích cỡ hoặc màu sắc? Vui lòng truy cập trang Trả lại hàng & Hoàn tiền của chúng tôi để biết chi tiết</p>		
+										</div>
+									</div>
+
 								</div>
 							</div>
 						</div>
