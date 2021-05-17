@@ -60,7 +60,7 @@ function Cart() {
 		);
 	}
 	return (
-		<div className='cart-container'>
+		<div className='cart-container mrt mrb'>
 			<div className='grid wide'>
 				<div className='row'>
 					<div className='col l-8'>

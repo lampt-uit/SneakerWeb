@@ -1,102 +1,127 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import Button from '../mainpages/utils/Button/Button';
 import './Footer.css'
 const Footer = () => {
 	return (
 		<div className='footer'>
 			<div className="grid wide footer-top">
 				<div className="row ">
-				<div className="content col l-3">
-					<h2>Sản phẩm</h2>
-					<ul>
-						<li>
-							<Link to='#'>Quần</Link>
-						</li>
-						<li>
-							<Link to='#'>Áo</Link>
-							</li>
-						<li>
-							<Link to='#'>Giày</Link>
-						</li>
-					</ul>
+					<div className="col l-8">
+						<div className="row">
+							<div className="col l-4">
+								<h2 className="footer-title">
+									Về chúng tôi
+								</h2>
+								<ul className="footer-list">
+									<li className="footer-item">
+										<Link  to="#" className="footer-link">
+											Tấn Lâm
+										</Link>
+									</li>
+									<li className="footer-item">
+										<Link  to="#" className="footer-link">
+											Đông Sinh
+										</Link>
+									</li>
+									<li className="footer-item">
+										<Link  to="#" className="footer-link">
+											Minh Thành
+										</Link>
+									</li>
+									<li className="footer-item">
+										<Link  to="#" className="footer-link">
+											Kim Thắng
+										</Link>
+									</li>
+								</ul>
+							</div>
+							<div className="col l-4">
+								<h2 className="footer-title">
+									Liên lạc chúng tôi
+								</h2>
+								<ul className="footer-list">
+									<li className="footer-item">
+										<Link  to="#" className="footer-link">
+											Ktx Khu A
+										</Link>
+									</li>
+									<li className="footer-item">
+										<Link  to="#" className="footer-link">
+											Tổng đài: 0324-xxx-xxx
+										</Link>
+									</li>
+								</ul>
+							</div>
+							<div className="col l-4">
+								<h2 className="footer-title">
+									Tại sao chọn Vatino
+								</h2>
+								<ul className="footer-list">
+									<li className="footer-item">
+										<Link to="#" className="footer-link">
+											Miễn phí giao hàng
+										</Link>
+									</li>
+									<li className="footer-item">
+										<Link to="#" className="footer-link">
+											Thẻ thành viên
+										</Link>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>	
+					<div className="col l-4">	
+						<h2 className="footer-title">
+							Đăng ký nhận ưu đãi qua Email
+						</h2>
+						<form >
+							<div className="">
+								<input
+										id='email'
+										name='email'
+										type='text'
+										placeholder='Your email'
+										className='form-control'
+									/>
+							</div>
+							<button className="btn-confirm">XÁC NHẬN</button>
+						</form>
+					</div>		
 				</div>
-				<div className="content col l-3">
-					<h2>Thể thao</h2>
-					<ul>
-						<li>
-							<Link to='#'>Quần</Link>
-						</li>
-						<li>
-							<Link to='#'>Áo</Link>
-							</li>
-						<li>
-							<Link to='#'>Giày</Link>
-						</li>
-					</ul>
-				</div>
-				<div className="content col l-3">
-					<h2>Bộ sưu tập</h2>
-					<ul>
-						<li>
-							<Link to='#'>Quần</Link>
-						</li>
-						<li>
-							<Link to='#'>Áo</Link>
-							</li>
-						<li>
-							<Link to='#'>Giày</Link>
-						</li>
-					</ul>
-				</div>
-				<div className="content col l-3">
-					<h2>Hỗ trợ</h2>
-					<ul>
-						<li>
-							<Link to='#'>Quần</Link>
-						</li>
-						<li>
-							<Link to='#'>Áo</Link>
-							</li>
-						<li>
-							<Link to='#'>Giày</Link>
-						</li>
-					</ul>
-				</div>
-				</div>
-			</div>
-			<div className="footer-bottom">
-				<div className="policy">
-					<ul>
-						<li>
-							<Link to='#'>Chính sách và bảo mật</Link>
-						</li>
-						<li>
-							<Link to='#'>Điều khoản và điều kiện</Link>
-						</li>
-						<li>
-							<Link to='#'>Thông tin về công ty</Link>
-						</li>
-						<li>
-							<Link to='#'>© 2020 Công ty TNHH adidas Việt Nam</Link>
-						</li>
-						
-					</ul>
-				</div>
+
 				<div className="social">
-					<ul>	
-						<li>
-							<Link to='#'><i class="fab fa-facebook-square"></i></Link>
-						</li>
-						<li>
-							<Link to='#'><i class="fab fa-twitter-square"></i></Link>
-						</li>
-						<li>
-							<Link to='#'> <i class="fab fa-google"></i></Link>
-						</li>
-					</ul>
+					<Link to='#' className="social-link">
+						<i class="fab fa-facebook-f"></i>
+					</Link>
+					<Link to='#' className="social-link">
+						<i class="fab fa-google-plus-g"></i>
+					</Link>
+					<Link to='#' className="social-link">
+						<i class="fab fa-instagram"></i>
+					</Link>
+				</div>	
+
+				<div className="policy">
+					<Link to="#" className="policy-link">Điều khoản và Điều Kiện</Link>
+					<Link to="#" className="policy-link">Chính sách bảo mật</Link>
 				</div>
-			</div>
+			</div>	
+
+				
+
+
 		</div>
+				
+							
+	
+
+
+
+
+
+
 
 		
 	);
