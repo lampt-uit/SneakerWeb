@@ -17,6 +17,7 @@ const Header = () => {
 		try {
 			await axios.get('/user/logout');
 			localStorage.removeItem('firstLogin');
+			localStorage.removeItem('dataCart');
 			window.location.href = '/';
 		} catch (error) {
 			window.location.href = '/';

@@ -5,7 +5,7 @@ import Register from './auth/Register';
 import Product from './product/Product';
 import DetailProduct from './detailProduct/DetailProduct';
 import { Switch, Route } from 'react-router-dom';
-import NotFound from './utils/Not_Found/NotFound';
+// import NotFound from './utils/Not_Found/NotFound';
 import Cart from './cart/Cart';
 import Profile from './profile/Profile';
 const Pages = () => {

@@ -16,10 +16,11 @@ const UserAPI = (token) => {
 				// console.log(res);
 				setUserInfo(res.data);
 				setIsLogged(true);
+				setCart([...cart, ...res.data.cart]);
 			};
 			getUser();
 		}
-	}, [token, callback]);
+	}, [token]);
 
 	useEffect(() => {
 		const getProducts = async () => {
@@ -28,7 +29,7 @@ const UserAPI = (token) => {
 			setPro(res.data.products);
 		};
 		getProducts();
-	}, [callback]);
+	}, []);
 
 	const addToCart = (id) => {
 		const check = cart.every((item) => {
@@ -39,14 +40,15 @@ const UserAPI = (token) => {
 				return product._id === id;
 			});
 			setCart([...cart, ...data]);
+			setCallback(!callback);
 		} else {
 			alert('San pham da them vao gio hang');
 		}
 	};
 
-	useEffect(() => {
+	useEffect(() => {	
 		const dataCart = JSON.parse(localStorage.getItem('dataCart'));
-		if (dataCart) setCart(dataCart);
+		if (dataCart) setCart([...cart, ...dataCart]);
 	}, []);
 
 	useEffect(() => {
@@ -56,16 +58,14 @@ const UserAPI = (token) => {
 	useEffect(() => {
 		const cartLocal = JSON.parse(localStorage.getItem('dataCart'));
 		// console.log(cartLocal);
-		if (cartLocal && cartLocal.length > 0) {
+		if (cartLocal) {
 			let newArr = [];
 			const updateCart = async () => {
 				for (const item of cartLocal) {
 					const res = await axios(`/api/product/${item._id}`);
 					// console.log(res.data);
-
 					newArr.push(res.data);
 				}
-
 				await axios.patch(
 					'/user/addcart',
 					{ cart: [...newArr] },
@@ -78,7 +78,7 @@ const UserAPI = (token) => {
 
 			updateCart();
 		}
-	}, [token, cart]);
+	}, [callback]);
 
 	return {
 		isLogged: [isLogged, setIsLogged],
