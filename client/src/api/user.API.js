@@ -7,6 +7,8 @@ const UserAPI = (token) => {
 	const [isLogged, setIsLogged] = useState(false);
 	const [userInfo, setUserInfo] = useState([]);
 	const [pro, setPro] = useState([]);
+	const [history, setHistory] = useState([]);
+
 	useEffect(() => {
 		if (token) {
 			const getUser = async () => {
@@ -20,6 +22,7 @@ const UserAPI = (token) => {
 			};
 			getUser();
 		}
+		// eslint-disable-next-line
 	}, [token]);
 
 	useEffect(() => {
@@ -42,13 +45,14 @@ const UserAPI = (token) => {
 			setCart([...cart, ...data]);
 			setCallback(!callback);
 		} else {
-			alert('San pham da them vao gio hang');
+			alert('Sản phẩm đã có trong giỏ hàng.');
 		}
 	};
 
-	useEffect(() => {	
+	useEffect(() => {
 		const dataCart = JSON.parse(localStorage.getItem('dataCart'));
 		if (dataCart) setCart([...cart, ...dataCart]);
+		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -78,6 +82,7 @@ const UserAPI = (token) => {
 
 			updateCart();
 		}
+		// eslint-disable-next-line
 	}, [callback]);
 
 	return {
@@ -85,6 +90,7 @@ const UserAPI = (token) => {
 		userInfo: [userInfo, setUserInfo],
 		cart: [cart, setCart],
 		callback: [callback, setCallback],
+		history: [history, setHistory],
 		addToCart
 	};
 };
