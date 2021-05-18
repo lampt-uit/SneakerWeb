@@ -102,27 +102,27 @@ function Cart() {
 		);
 	}
 	return (
-		<>
-			{toast && (
-				<Toast type='success' msg='Hệ thống đã ghi nhận đơn hàng của bạn.' />
-			)}
-			<div className='cart-container'>
-				<div className='grid wide'>
-					<div className='row'>
-						<div className='col l-8'>
-							<div className='cart-title'>
-								<h4>Giỏ hàng của bạn</h4>
-								<Link to='/product'>Tiếp tục mua hàng</Link>
-							</div>
-							{cart.map((product) => (
-								<div className='row cart-detail'>
-									<div className='col l-2'>
-										<div className='product_cart'>
-											<img
-												src={product.image[0]}
-												alt=''
-												className='cart_link'
-											/>
+		<div className='cart-container mrt mrb'>
+			<div className='grid wide'>
+				<div className='row'>
+					<div className='col l-8'>
+						<div className='cart-title'>
+							<h4>Giỏ hàng của bạn</h4>
+							<Link to='/product'>Tiếp tục mua hàng</Link>
+						</div>
+						{cart.map((product) => (
+							<div className='row cart-detail'>
+								<div className='col l-2'>
+									<div className='product_cart'>
+										<img src={product.image[0]} alt='' className="cart_link"/>
+									</div>
+								</div>
+								<div className='col l-10'>
+									<div className='row'>
+										<div className='col l-6 content'>
+											<h3 className="content-title">{product.title}</h3>
+											<span className="content-price">${product.price}</span>
+											<div className="content-stock">Còn lại trong kho: {product.stock}</div>
 										</div>
 									</div>
 									<div className='col l-10'>
