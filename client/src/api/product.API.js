@@ -6,7 +6,7 @@ const ProductAPI = () => {
 	const [callback, setCallback] = useState(false);
 	const [category, setCategory] = useState('');
 	const [sort, setSort] = useState('');
-	
+
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(1);
 
@@ -26,6 +26,7 @@ const ProductAPI = () => {
 	const handleReset = () => {
 		setSort('');
 		setCategory('');
+		setSearch('');
 	};
 
 	return {

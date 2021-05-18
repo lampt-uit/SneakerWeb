@@ -114,149 +114,138 @@ function Cart() {
 							<div className='row cart-detail'>
 								<div className='col l-2'>
 									<div className='product_cart'>
-										<img src={product.image[0]} alt='' className="cart_link"/>
+										<img src={product.image[0]} alt='' className='cart_link' />
 									</div>
 								</div>
 								<div className='col l-10'>
 									<div className='row'>
 										<div className='col l-6 content'>
-											<h3 className="content-title">{product.title}</h3>
-											<span className="content-price">${product.price}</span>
-											<div className="content-stock">Còn lại trong kho: {product.stock}</div>
+											<h3 className='content-title'>{product.title}</h3>
+											<span className='content-price'>${product.price}</span>
+											<div className='content-stock'>
+												Còn lại trong kho: {product.stock}
+											</div>
 										</div>
-									</div>
-									<div className='col l-10'>
-										<div className='row'>
-											<div className='col l-6 content'>
-												<h3 className='content-title'>{product.title}</h3>
-												<span className='content-price'>${product.price}</span>
-												<div className='content-stock'>
-													Còn lại trong kho: {product.stock}
-												</div>
+
+										<div className='col l-3 select'>
+											<div className='amount'>
+												<Link onClick={() => decrease(product._id)}>-</Link>
+												<span>{product.count}</span>
+												<Link onClick={() => increase(product._id)}>+</Link>
 											</div>
 
-											<div className='col l-3 select'>
-												<div className='amount'>
-													<Link onClick={() => decrease(product._id)}>-</Link>
-													<span>{product.count}</span>
-													<Link onClick={() => increase(product._id)}>+</Link>
-												</div>
-
-												<span>Chọn Size: </span>
-												<select
-													className='select-size'
-													onChange={(e) =>
-														handleChangeSize(
-															product._id,
-															e.target.value || product.size[0]
-														)
-													}
-												>
-													<option disabled selected>
-														Size
-													</option>
-													{product.size.map((size) => (
-														<option value={size}>{size}</option>
-													))}
-												</select>
-											</div>
-											<div className='col l-3 cart-price'>
-												<h3 className='total_price'>
-													$ {product.price * product.count}
-												</h3>
-												<span
-													className='delete'
-													onClick={() => remove(product._id)}
-												>
-													Remove
-												</span>
-											</div>
+											<span>Chọn Size: </span>
+											<select
+												className='select-size'
+												onChange={(e) =>
+													handleChangeSize(
+														product._id,
+														e.target.value || product.size[0]
+													)
+												}
+											>
+												<option disabled selected>
+													Size
+												</option>
+												{product.size.map((size) => (
+													<option value={size}>{size}</option>
+												))}
+											</select>
+										</div>
+										<div className='col l-3 cart-price'>
+											<h3 className='total_price'>
+												$ {product.price * product.count}
+											</h3>
+											<span
+												className='delete'
+												onClick={() => remove(product._id)}
+											>
+												Remove
+											</span>
 										</div>
 									</div>
 								</div>
-							))}
+							</div>
+						))}
+					</div>
+					<div className='col l-4'>
+						<div className='cart-warpper'>
+							<h1>Thông tin nhận hàng </h1>
+							<div className='address'>
+								<form className='form'>
+									<div className='form-group'>
+										<label htmlFor='name' className='form-label'>
+											Họ và tên <span style={{ color: 'crimson' }}>*</span>
+										</label>
+										<input
+											id='name'
+											name='name'
+											type='text'
+											defaultValue={userInfo.name}
+											className='input'
+											onChange={onChangeInput}
+										/>
+									</div>
+									<div className='form-group'>
+										<label htmlFor='phone' className='form-label'>
+											Số điện thoại <span style={{ color: 'crimson' }}>*</span>
+										</label>
+										<input
+											id='phone'
+											name='phone'
+											type='text'
+											defaultValue={userInfo.phone}
+											className='input'
+											onChange={onChangeInput}
+										/>
+									</div>
+									<div className='form-group'>
+										<label htmlFor='address' className='form-label'>
+											Địa chỉ <span style={{ color: 'crimson' }}>*</span>
+										</label>
+										<input
+											id='address'
+											name='address'
+											type='text'
+											defaultValue={userInfo.address}
+											className='input'
+											onChange={onChangeInput}
+										/>
+									</div>
+									<div className='form-group'>
+										<label htmlFor='note' className='form-label'>
+											Ghi chú
+										</label>
+										<textarea
+											name='note'
+											id='note'
+											cols='1'
+											rows='3'
+											onChange={onChangeInput}
+										/>
+									</div>
+								</form>
+							</div>
 						</div>
-						<div className='col l-4'>
+						<div className='order'>
 							<div className='cart-warpper'>
-								<h1>Thông tin nhận hàng </h1>
-								<div className='address'>
-									<form className='form'>
-										<div className='form-group'>
-											<label htmlFor='name' className='form-label'>
-												Họ và tên <span style={{ color: 'crimson' }}>*</span>
-											</label>
-											<input
-												id='name'
-												name='name'
-												type='text'
-												defaultValue={userInfo.name}
-												className='input'
-												onChange={onChangeInput}
-											/>
-										</div>
-										<div className='form-group'>
-											<label htmlFor='phone' className='form-label'>
-												Số điện thoại{' '}
-												<span style={{ color: 'crimson' }}>*</span>
-											</label>
-											<input
-												id='phone'
-												name='phone'
-												type='text'
-												defaultValue={userInfo.phone}
-												className='input'
-												onChange={onChangeInput}
-											/>
-										</div>
-										<div className='form-group'>
-											<label htmlFor='address' className='form-label'>
-												Địa chỉ <span style={{ color: 'crimson' }}>*</span>
-											</label>
-											<input
-												id='address'
-												name='address'
-												type='text'
-												defaultValue={userInfo.address}
-												className='input'
-												onChange={onChangeInput}
-											/>
-										</div>
-										<div className='form-group'>
-											<label htmlFor='note' className='form-label'>
-												Ghi chú
-											</label>
-											<textarea
-												name='note'
-												id='note'
-												cols='1'
-												rows='3'
-												onChange={onChangeInput}
-											/>
-										</div>
-									</form>
+								<h1>Thông tin đơn hàng</h1>
+								<div className='order-content'>
+									<p>Tổng số sản phẩm: 8</p>
+									<p>Hình thức thanh toán: Trục tiếp</p>
+									<p>Hình thức giao hàng: Giao hành nhanh</p>
+									<p>Chương trình khuyến mãi: Không</p>
+									<h2>Tổng tiền: $ {total}</h2>
 								</div>
 							</div>
-
-							<div className='order'>
-								<div className='cart-warpper'>
-									<h1>Thông tin đơn hàng</h1>
-									<div className='order-content'>
-										<p>Tổng số sản phẩm: 8</p>
-										<p>Hình thức thanh toán: Trục tiếp</p>
-										<p>Hình thức giao hàng: Giao hành nhanh</p>
-										<p>Chương trình khuyến mãi: Không</p>
-										<h2>Tổng tiền: $ {total}</h2>
-									</div>
-								</div>
-							</div>
-							<div onClick={() => proceed()}>
-								<Button text='Thanh toán' />
-							</div>
+						</div>
+						<div onClick={() => proceed()}>
+							<Button text='Thanh toán' />
 						</div>
 					</div>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

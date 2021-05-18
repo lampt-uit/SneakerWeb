@@ -32,6 +32,22 @@
 	letter-spacing: 1.2px;
 }
 
+.reset_sort_search {
+	display: flex;
+	justify-content: space-between;
+}
+.reset_sort_search button {
+	outline: none;
+	padding: 8px;
+	border: 1px solid #bdc3c7;
+	border-radius: 4px;
+	width: 30px;
+	height: 30px;
+}
+.reset_sort_search button i {
+	transform: translateY(-2px);
+}
+
 .home_product h2 i {
 	cursor: pointer;
 }

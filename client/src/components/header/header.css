@@ -42,7 +42,6 @@
 .header-bottom_nav {
 	flex: 4;
 	text-align: center;
-	margin-bottom: 2px;
 }
 .header-bottom_nav ul {
 	display: flex;
@@ -67,7 +66,6 @@
 
 .header-bottom_nav ul li:hover {
 	border-bottom: 3px solid #636e72;
-	background: #dfe6e9;
 }
 
 .header-bottom_search {
