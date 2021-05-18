@@ -32,6 +32,10 @@
 	letter-spacing: 1.2px;
 }
 
+.home_product h2 i {
+	cursor: pointer;
+}
+
 .home_filter {
 	display: flex;
 	height: 60px;

@@ -13,6 +13,11 @@ const Header = () => {
 	const [isLogged] = state.userAPI.isLogged;
 	const [cart] = state.userAPI.cart;
 
+	const [categories] = state.categoryAPI.categories;
+	// console.log(categories);
+
+	const [category, setCategory] = state.productAPI.category;
+
 	const handleLogout = async () => {
 		try {
 			await axios.get('/user/logout');
@@ -66,12 +71,24 @@ const Header = () => {
 				</ul>
 			</div>
 			<div className='header-bottom'>
-				<Link to='/' className='header-bottom_logo'>
+				<Link
+					to='/'
+					className='header-bottom_logo'
+					onClick={() => setCategory('')}
+				>
 					<img src={Logo} alt='' width='100' />
 				</Link>
 				<div className='header-bottom_nav'>
 					<ul>
-						<li>
+						{categories.map((category) => (
+							<li
+								key={category._id}
+								onClick={() => setCategory(`category=${category._id}`)}
+							>
+								<h4>{category.name}</h4>
+							</li>
+						))}
+						{/* <li>
 							<Link to='/product'>Nike</Link>
 						</li>
 						<li>
@@ -88,10 +105,10 @@ const Header = () => {
 						</li>
 						<li>
 							<Link to='/product'>Thương hiệu khác</Link>
-						</li>
+						</li> */}
 					</ul>
 				</div>
-				<div className='hearder-bottom_search'>
+				<div className='header-bottom_search'>
 					<div className='form-input'>
 						<input type='text' placeholder='Tìm kiếm' />
 						<i className='fas fa-search'></i>
