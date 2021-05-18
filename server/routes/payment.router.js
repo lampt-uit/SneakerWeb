@@ -7,6 +7,6 @@ const authAdmin = require('../middlewares/authAdmin');
 router
 	.route('/payments')
 	.get(auth, authAdmin, paymentController.getPayments)
-	.post(auth, paymentController.createPayment);
+	.post(paymentController.createPayment);
 
 module.exports = router;

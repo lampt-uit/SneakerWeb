@@ -1,4 +1,5 @@
 const Users = require('../models/user.model');
+const Payments = require('../models/payment.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -115,6 +116,8 @@ const userController = {
 			if (!user)
 				return res.status(400).json({ msg: "User doesn't not exists " });
 
+			// console.log(req.body.cart);
+
 			await Users.findOneAndUpdate(
 				{ _id: req.user.id },
 				{
@@ -125,6 +128,14 @@ const userController = {
 			return res.json({ msg: 'Added to cart' });
 		} catch (error) {
 			return res.status(500).json({ msg: error.msg });
+		}
+	},
+	history: async (req, res) => {
+		try {
+			const history = await Payments.find({ user_id: req.user.id });
+			res.json(history);
+		} catch (error) {
+			return res.status(500).json({ msg: error.message });
 		}
 	}
 };
