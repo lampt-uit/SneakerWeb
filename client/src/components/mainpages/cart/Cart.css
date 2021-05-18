@@ -1,6 +1,5 @@
 .cart-container {
 	padding-top: 40px;
-
 }
 .cart-title {
 	display: flex;
@@ -116,4 +115,17 @@
 .order-content p {
 	line-height: 26px;
 	font-size: 16px;
+}
+
+textarea {
+	resize: none;
+	padding: 5px;
+	outline: none;
+	border: 1px solid #95a5a6;
+}
+
+input {
+	padding: 5px;
+	outline: none;
+	border: 1px solid #95a5a6;
 }

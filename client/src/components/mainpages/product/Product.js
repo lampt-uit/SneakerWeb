@@ -6,36 +6,37 @@ import './Product.css';
 import ProductItem from '../productItem/ProductItem';
 function Product() {
 	const state = useContext(GlobalState);
-	// console.log(state);
 	const [products] = state.productAPI.products;
 	// const [category, setCategory] = state.productAPI.category;
 	const [sort, setSort] = state.productAPI.sort;
-	const handleReset = state.productAPI.handleReset;
-	const [category, setCategory] = state.productAPI.category;
 	// const [search, setSearch] = state.productAPI.search;
-	// console.log(products);
+
+	const handleReset = state.productAPI.handleReset;
 
 	return (
 		<div className='home_product mrt mrb'>
 			<div className='grid wide'>
 				<div className='breadcrumb'>
 					<Link to='#'>
-						<i className='fas fa-arrow-left'></i>Trở lại
+						<i className='fas fa-arrow-left'></i>
+						Trở lại
 					</Link>
 					<Link to='/' onClick={() => handleReset()}>
 						Trang Chủ
 					</Link>
 				</div>
-				<h2>
-					All Products{' '}
-					<i class='fas fa-sync-alt' onClick={() => handleReset()}></i>
-				</h2>
+				<div className='reset_sort_search'>
+					<h2>All Products </h2>
 
+					<button onClick={() => handleReset()} title='Reset Sort And Search'>
+						<i class='fas fa-sync-alt'></i>
+					</button>
+				</div>
 				<div className='home_filter'>
 					<span className='home_filter_label'>Sắp xếp theo </span>
 					<button
 						className='home_filter-button'
-						onClick={() => setSort('sort=createdAt')}
+						onClick={() => setSort('sort=updatedAt')}
 					>
 						Mới nhất
 					</button>

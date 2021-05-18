@@ -17,6 +17,8 @@ const Header = () => {
 	// console.log(categories);
 
 	const [category, setCategory] = state.productAPI.category;
+	const [search, setSearch] = state.productAPI.search;
+	const handleReset = state.productAPI.handleReset;
 
 	const handleLogout = async () => {
 		try {
@@ -74,44 +76,35 @@ const Header = () => {
 				<Link
 					to='/'
 					className='header-bottom_logo'
-					onClick={() => setCategory('')}
+					onClick={() => handleReset()}
 				>
 					<img src={Logo} alt='' width='100' />
 				</Link>
 				<div className='header-bottom_nav'>
 					<ul>
 						{categories.map((category) => (
-							<li
-								key={category._id}
-								onClick={() => setCategory(`category=${category._id}`)}
-							>
-								<h4>{category.name}</h4>
-							</li>
+							<Link to='/product'>
+								<li
+									key={category._id}
+									onClick={() => setCategory(`category=${category._id}`)}
+								>
+									<h4>{category.name}</h4>
+								</li>
+							</Link>
 						))}
-						{/* <li>
-							<Link to='/product'>Nike</Link>
-						</li>
-						<li>
-							<Link to='/product'>Puma</Link>
-						</li>
-						<li>
-							<Link to='/product'>Converse</Link>
-						</li>
-						<li>
-							<Link to='/product'>Adidas</Link>
-						</li>
-						<li>
-							<Link to='/product'>Vans</Link>
-						</li>
-						<li>
-							<Link to='/product'>Thương hiệu khác</Link>
-						</li> */}
 					</ul>
 				</div>
 				<div className='header-bottom_search'>
 					<div className='form-input'>
-						<input type='text' placeholder='Tìm kiếm' />
-						<i className='fas fa-search'></i>
+						<input
+							type='text'
+							placeholder='Tìm kiếm'
+							value={search}
+							onChange={(e) => setSearch(e.target.value.toLowerCase())}
+						/>
+						<Link to='/product'>
+							<i className='fas fa-search'></i>
+						</Link>
 					</div>
 					<Link to='/cart' className='icon-cart'>
 						<i className='fas fa-shopping-cart'></i>
