@@ -23,13 +23,19 @@ const ProductAPI = () => {
 		getProducts();
 	}, [callback, page, category, sort, search]);
 
+	const handleReset = () => {
+		setSort('');
+		setCategory('');
+	};
+
 	return {
 		products: [products, setProducts],
 		callback: [callback, setCallback],
 		category: [category, setCategory],
 		sort: [sort, setSort],
 		search: [search, setSearch],
-		page: [page, setPage]
+		page: [page, setPage],
+		handleReset
 	};
 };
 

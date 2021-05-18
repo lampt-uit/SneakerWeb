@@ -10,6 +10,8 @@ function Product() {
 	const [products] = state.productAPI.products;
 	// const [category, setCategory] = state.productAPI.category;
 	const [sort, setSort] = state.productAPI.sort;
+	const handleReset = state.productAPI.handleReset;
+	const [category, setCategory] = state.productAPI.category;
 	// const [search, setSearch] = state.productAPI.search;
 	// console.log(products);
 
@@ -20,9 +22,15 @@ function Product() {
 					<Link to='#'>
 						<i className='fas fa-arrow-left'></i>Trở lại
 					</Link>
-					<Link to='/'>Trang Chủ</Link>
+					<Link to='/' onClick={() => handleReset()}>
+						Trang Chủ
+					</Link>
 				</div>
-				<h2>All Products</h2>
+				<h2>
+					All Products{' '}
+					<i class='fas fa-sync-alt' onClick={() => handleReset()}></i>
+				</h2>
+
 				<div className='home_filter'>
 					<span className='home_filter_label'>Sắp xếp theo </span>
 					<button

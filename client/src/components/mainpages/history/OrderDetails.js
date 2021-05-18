@@ -23,6 +23,10 @@ function OrderDetails() {
 		return prev + item.price * item.count;
 	}, 0);
 
+	const style = {
+		color: !detailOrder.status ? 'red' : 'green'
+	};
+
 	return (
 		<div className='history-detail'>
 			<h1>Day la chi tiet don hang</h1>
@@ -39,8 +43,8 @@ function OrderDetails() {
 					<td>{detailOrder.phone}</td>
 					<td>{detailOrder.address}</td>
 					<td>{new Date(detailOrder.createdAt).toLocaleDateString()}</td>
-					<td style={{ fontWeight: '700' }}>
-						{!detailOrder ? 'Đã thanh toán' : 'Chưa thanh toán'}{' '}
+					<td style={style}>
+						{detailOrder.status ? 'Đã thanh toán' : 'Chưa thanh toán'}{' '}
 					</td>
 				</tr>
 			</table>
