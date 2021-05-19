@@ -1,44 +1,48 @@
 .history {
-	margin-top: 100px;
-	display: flex;
-	margin-bottom: 100px;
-	justify-content: space-around;
+	padding-top: 60px;
+
 }
 
 .history-content {
 	margin-top: 20px;
 }
 
-.history-page {
-	overflow-x: auto;
-	width: 750px;
-}
-.history-page h2,
-h4 {
+
+.history-page h2, 
+h4
+{
 	text-align: center;
 	margin: 20px;
 	text-transform: uppercase;
 	letter-spacing: 1.2px;
 }
-.history-page table {
-	margin: auto;
-	width: 100%;
+
+table {
+	border: 1px solid #000;
 }
-.history-page table,
-th,
-tr,
-td {
-	border: 1px solid #ddd;
-	border-collapse: collapse;
-}
-th,
-td {
+td,
+th{
+	padding: 15px 20px;
 	text-align: center;
-	padding: 10px;
-	text-transform: capitalize;
 }
-table a {
-	color: rgb(3, 165, 206);
+
+td {
+	font-size: 16px;
+}
+th{
+	background-color: #03a9ff;
+	color: #000;
+	font-family: 'Open Sans',Sans-serif;
+	font-weight: 200;
+	text-transform: uppercase;
+}
+tr{
+	width: 100%;
+	background-color: #fafafa;
+	font-family: 'Montserrat', sans-serif;
+}
+tr:nth-child(odd){
+	background-color: #eeeeee;
 }
 
 .history-page img {
@@ -46,3 +50,4 @@ table a {
 	height: 100px;
 	object-fit: cover;
 }
+

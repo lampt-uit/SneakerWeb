@@ -9,6 +9,8 @@ function OrderHistory() {
 	const [history, setHistory] = state.userAPI.history;
 	const [token] = state.token;
 
+	
+
 	useEffect(() => {
 		if (token) {
 			const getHistory = async () => {
@@ -31,34 +33,37 @@ function OrderHistory() {
 		);
 
 	return (
-		<div className='history'>
-			<div className='history-content'>
-				<h2>Cảm ơn bạn đã mua hàng của chúng tôi.</h2>
-			</div>
-
-			<div className='history-page'>
-				<h2>Lịch sử đơn hàng</h2>
-				<h4>Bạn đã có {history.length} đơn hàng</h4>
-				<table>
-					<thead>
-						<tr>
-							<th>Mã đơn</th>
-							<th>Ngày mua</th>
-							<th>Chi tiết</th>
-						</tr>
-					</thead>
-					<tbody>
-						{history.map((items) => (
-							<tr key={items._id}>
-								<td>{items._id}</td>
-								<td>{new Date(items.createdAt).toLocaleDateString()}</td>
-								<td>
-									<Link to={`/history/${items._id}`}>Xem</Link>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+		<div className='history mrt mrb'>
+			<div className="grid wide">
+				<div className="row">
+					<div className="col l-12">
+						<div className='history-page'>
+							<h2>Lịch sử đơn hàng</h2>
+							<h4>Bạn đã có {history.length} đơn hàng</h4>
+							<table>
+								<thead>
+									<tr>
+										<th>Stt</th>
+										<th>Mã đơn</th>
+										<th>Ngày mua</th>
+										<th>Chi tiết</th>
+									</tr>
+								</thead>
+							
+									{history.map((items, index) => (
+										<tr key={items._id}>
+											<td>{index + 1}</td>
+											<td>{items._id}</td>
+											<td>{new Date(items.createdAt).toLocaleDateString()}</td>
+											<td>
+												<Link to={`/history/${items._id}`}>Xem</Link>
+											</td>
+											</tr>
+									))}
+							</table>
+						</div>		
+					</div>	
+				</div>
 			</div>
 		</div>
 	);
