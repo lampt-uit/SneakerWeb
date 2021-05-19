@@ -18,7 +18,33 @@ const UserAPI = (token) => {
 				// console.log(res);
 				setUserInfo(res.data);
 				setIsLogged(true);
-				setCart([...cart, ...res.data.cart]);
+
+				//
+				const arr1 = [];
+				const arr2 = [];
+				cart.forEach((item) => {
+					arr1.push(item._id);
+				});
+				res.data.cart.forEach((item) => {
+					arr2.push(item._id);
+				});
+
+				const id = new Set([...arr1, ...arr2]);
+				const unique_id = [...id];
+				const data = await axios.get('/api/products');
+				const newCart = [];
+				unique_id.forEach((item) => {
+					data.data.products.forEach((item2) => {
+						if (item2._id === item) {
+							newCart.push(item2);
+						}
+					});
+				});
+				setCart([...newCart]);
+
+				//
+
+				// setCart([...cart, ...res.data.cart]);
 			};
 			getUser();
 		}
@@ -57,6 +83,7 @@ const UserAPI = (token) => {
 
 	useEffect(() => {
 		localStorage.setItem('dataCart', JSON.stringify(cart));
+		setCallback(!callback);
 	}, [cart]);
 
 	useEffect(() => {
