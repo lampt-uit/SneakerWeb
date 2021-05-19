@@ -13,11 +13,15 @@ const ProductAPI = () => {
 	useEffect(() => {
 		const getProducts = async () => {
 			const res = await axios.get(
-				`/api/products?limit=${
-					page * 30
-				}&${category}&${sort}&title[regex]=${search}`
+				`/api/products?limit=8&page=${page}&${category}&${sort}&title[regex]=${search}`
 			);
+			// const res = await axios.get(
+			// 	`/api/products?limit=${
+			// 		page * 30
+			// 	}&${category}&${sort}&title[regex]=${search}`
+			// );
 			// console.log(res.data);
+			console.log(products);
 			setProducts(res.data.products);
 		};
 		getProducts();
@@ -27,6 +31,7 @@ const ProductAPI = () => {
 		setSort('');
 		setCategory('');
 		setSearch('');
+		setPage(1);
 	};
 
 	return {
