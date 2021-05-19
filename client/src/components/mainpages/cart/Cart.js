@@ -95,7 +95,12 @@ function Cart() {
 	if (cart.length === 0) {
 		return (
 			<h2
-				style={{ textAlign: 'center', fontSize: '5rem', paddingTop: '100px' }}
+				style={{
+					textAlign: 'center',
+					fontSize: '5rem',
+					paddingTop: '147px',
+					marginBottom: '90px'
+				}}
 			>
 				Giỏ hàng trống
 			</h2>
