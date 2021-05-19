@@ -118,6 +118,7 @@ const UserAPI = (token) => {
 		cart: [cart, setCart],
 		callback: [callback, setCallback],
 		history: [history, setHistory],
+		pro: [pro, setPro],
 		addToCart
 	};
 };
