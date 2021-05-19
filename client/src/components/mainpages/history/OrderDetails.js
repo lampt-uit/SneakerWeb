@@ -28,8 +28,9 @@ function OrderDetails() {
 	};
 
 	return (
-		<div className='history-detail'>
-			<h1>Day la chi tiet don hang</h1>
+		<div className='history-detail mrt mrb'>
+			<div className="grid wide">
+			<h1 className="history-title">Chi tiết đơn hàng</h1>
 			<table>
 				<tr>
 					<th>Tên người mua</th>
@@ -39,7 +40,7 @@ function OrderDetails() {
 					<th>Trạng thái đơn hàng</th>
 				</tr>
 				<tr>
-					<td>{detailOrder.name}</td>
+					<td >{detailOrder.name}</td>
 					<td>{detailOrder.phone}</td>
 					<td>{detailOrder.address}</td>
 					<td>{new Date(detailOrder.createdAt).toLocaleDateString()}</td>
@@ -63,14 +64,14 @@ function OrderDetails() {
 						<td>
 							<img src={item.image[0]} alt='' />
 						</td>
-						<td>{item.title}</td>
-						<td>$ {item.price}</td>
+						<td className="td-name">{item.title}</td>
+						<td className="td-price">$ {item.price}</td>
 						<td>{item.count}</td>
 						<td>{item.sizesl}</td>
 					</tr>
 				))}
 				<tr>
-					<td colSpan='4' style={{ fontSize: '20px', fontWeight: 700 }}>
+					<td colSpan='4' style={{ fontSize: '20px', fontWeight: 700 }} className="heading-payment">
 						Tổng thanh toán
 					</td>
 					<td style={{ fontSize: '22px', fontWeight: 700, color: 'crimson' }}>
@@ -78,6 +79,7 @@ function OrderDetails() {
 					</td>
 				</tr>
 			</table>
+			</div>
 		</div>
 	);
 }

@@ -5,7 +5,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 28px;
+	margin-bottom: 12px;
 }
 .cart-title h4 {
 	text-transform: uppercase;
