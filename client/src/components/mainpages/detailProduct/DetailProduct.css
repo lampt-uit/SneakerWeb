@@ -122,7 +122,39 @@
 	object-fit: cover;
 	border: 1px solid #c8d6e5;
 }
+.relate-thumb {
+	margin-top: 50px;
+}
+.relate-thumb div img {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+	margin: 20px 20px 0 0;
+	border: 1px solid #c8d6e5;
+}
 
+/*  */
+.reviews {
+	width: 125px;
+	margin: 20px 0;
+}
+.reviews input {
+	display: none;
+}
+.reviews label {
+	color: #999;
+	margin: 5px 0;
+	padding-right: 5px;
+	cursor: pointer;
+	float: right;
+}
+.reviews input:not(:checked) ~ label:hover,
+.reviews input:not(:checked) ~ label:hover ~ label {
+	color: crimson;
+}
+.reviews input:checked ~ label {
+	color: crimson;
+}
 
 .promotion {
 	display: flex;
@@ -133,12 +165,11 @@
 	margin-right: 4px;
 	color: red;
 }
-.promotion .promotion-content  {
+.promotion .promotion-content {
 	line-height: 24px;
 	font-size: 16px;
 }
 .promotion .promotion-content .promotion-link {
 	border-bottom: 1px solid #4d4a4a;
 	color: #000;
-	
 }

@@ -137,6 +137,25 @@ const userController = {
 		} catch (error) {
 			return res.status(500).json({ msg: error.message });
 		}
+	},
+	updateUserInfo: async (req, res) => {
+		try {
+			const { name, phone, address } = req.body;
+			await Users.findByIdAndUpdate(
+				{
+					_id: req.user.id
+				},
+				{
+					name,
+					phone,
+					address
+				}
+			);
+
+			res.json({ message: 'Updated successful' });
+		} catch (error) {
+			return res.status(500).json({ msg: error.message });
+		}
 	}
 };
 
