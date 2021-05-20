@@ -7,14 +7,10 @@ function Pagination() {
 	const state = useContext(GlobalState);
 	const [pro] = state.userAPI.pro;
 	const [page, setPage] = state.productAPI.page;
-	console.log(page);
 
-	// console.log(pro);
+	const [itemsPage] = useState(8);
 
-	// const [currPage, setCurrPage] = useState(1);
-	const [itemsPage, setItemsPage] = useState(8);
-
-	const [pageNumberLimit, setPageNumberLimit] = useState(3);
+	const [pageNumberLimit] = useState(3);
 	const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(3);
 	const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
@@ -48,7 +44,7 @@ function Pagination() {
 			<ul className='page-number'>
 				<li>
 					<button
-						disabled={page == pages[0] ? true : false}
+						disabled={page === pages[0] ? true : false}
 						onClick={handlePrevBtn}
 					>
 						Prev
@@ -60,7 +56,7 @@ function Pagination() {
 							key={_page}
 							value={_page}
 							onClick={handleClick}
-							className={page == _page ? 'active' : null}
+							className={page === _page ? 'active' : null}
 						>
 							{_page}
 						</li>
@@ -68,7 +64,7 @@ function Pagination() {
 				)}
 				<li>
 					<button
-						disabled={page == pages[pages.length - 1] ? true : false}
+						disabled={page === pages[pages.length - 1] ? true : false}
 						onClick={handleNextBtn}
 					>
 						Next

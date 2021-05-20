@@ -21,7 +21,7 @@ const ProductAPI = () => {
 			// 	}&${category}&${sort}&title[regex]=${search}`
 			// );
 			// console.log(res.data);
-			console.log(products);
+			// console.log(products);
 			setProducts(res.data.products);
 		};
 		getProducts();

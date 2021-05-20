@@ -38,18 +38,27 @@ function Product() {
 					<div className='home_filter'>
 						<span className='home_filter_label'>Sắp xếp theo </span>
 						<button
+							style={{
+								border: sort === 'sort=updatedAt' ? '1px solid black' : ''
+							}}
 							className='home_filter-button'
 							onClick={() => setSort('sort=updatedAt')}
 						>
 							Mới nhất
 						</button>
 						<button
+							style={{
+								border: sort === 'sort=-sold' ? '1px solid black' : ''
+							}}
 							className='home_filter-button'
 							onClick={() => setSort('sort=-sold')}
 						>
 							Bán chạy
 						</button>
 						<button
+							style={{
+								border: sort === 'sort=-numReviews' ? '1px solid black' : ''
+							}}
 							className='home_filter-button'
 							onClick={() => setSort('sort=-numReviews')}
 						>
