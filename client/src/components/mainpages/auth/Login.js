@@ -7,11 +7,14 @@ import axios from 'axios';
 import './Login.css';
 import { showErrMsg, showSuccessMsg } from '../utils/Notification/Notification';
 import Button from '../utils/Button/Button';
-
+import Modal from '../utils/Modal/Modal'
 function Login() {
 	const [state, setState] = useState({ err: '', success: '' });
 	const { err, success } = state;
 
+	const [show, setShow] = useState(false)
+	const closeModalHandler = () => setShow(false)
+ 
 	const formik = useFormik({
 		initialValues: {
 			email: '',
@@ -43,15 +46,23 @@ function Login() {
 	});
 
 	return (
+		<>
+		{show ? <div onClick={closeModalHandler} className='back-drop'></div> : null}
 		<div className='login mrt mrb'>
 			<div className='grid wide'>
 				<div className='row app-content'>
 					<div className='col l-6 m-12 c-12'>
 						<form className='form' onSubmit={formik.handleSubmit}>
 							<h2 className='heading'>Đăng nhập</h2>
-							<Link to='#' className='desc'>
+
+							
+							<button className='desc'onClick={() => setShow(true)}>
 								Bạn quên mật khẩu?
-							</Link>
+							</button>
+							<Modal show={show}/>
+
+
+
 							{err && showErrMsg(err)}
 							{success && showSuccessMsg(success)}
 							<div className='form-group'>
@@ -70,7 +81,7 @@ function Login() {
 								{formik.errors.email && formik.touched.email && (
 									<span className='form-message'>{formik.errors.email}</span>
 								)}
-								<span className='form-message'></span>
+							
 							</div>
 							<div className='form-group'>
 								<label htmlFor='password' className='form-label'>
@@ -88,7 +99,7 @@ function Login() {
 								{formik.errors.password && formik.touched.password && (
 									<span className='form-message'>{formik.errors.password}</span>
 								)}
-								<span className='form-message'></span>
+						
 							</div>
 							<Button text='Đăng nhập' />
 						</form>
@@ -145,6 +156,7 @@ function Login() {
 				</div>
 			</div>
 		</div>
+		</>
 	);
 }
 

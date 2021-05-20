@@ -1,15 +1,18 @@
+
 import React, { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-
-// import { showErrMsg, showSuccessMsg } from '../utils/Notification/Notification';
 import './Profile.css';
 import { Link } from 'react-router-dom';
 import { GlobalState } from '../../../GlobalState';
 import Button from '../utils/Button/Button';
 import Toast from '../utils/Toast/Toast';
-function Profile() {
+function Profile() {	
+	const [toggle, setToggle] = useState(1);
+	const toggleTab = (index) => {
+		setToggle(index)
+	}
 	const _state = useContext(GlobalState);
 	const [toast, setToast] = useState(false);
 	const [userInfo] = _state.userAPI.userInfo;
@@ -77,26 +80,25 @@ function Profile() {
 									</div>
 								</div>
 								<div className='user-page-menu'>
-									<ul className='page-menu-list'>
-										<li className='page-menu-item'>
-											<Link to='#' className='page-menu-link'>
-												<i class='fas fa-user'></i>
-												<span>Thông tin tài khoản</span>
-											</Link>
-										</li>
-									</ul>
+									<button className={toggle === 1 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(1)} >
+										<i class="fas fa-user"></i>
+										<span>Thông tin tài khoản</span>
+									</button>
+									<button className={toggle === 2 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(2)}>
+										<i class="fas fa-unlock"></i>
+										<span>Đặt lại mật khẩu</span>
+									</button>
+									
 								</div>
 							</div>
 						</div>
 						<div className='col l-9'>
-							<div className='my-account'>
-								<div className='my-account-header'>
+							<div className={toggle === 1 ? "tabs-content active-content" : "tabs-content"}>
+								<div className='tabs-heading'>
 									<p>Thông tin tài khoản</p>
 								</div>
-								<div className='my-account-profile'>
+								<div className='my-accounte'>
 									<form className='form-profile' onSubmit={formik.handleSubmit}>
-										{/* {err && showErrMsg(err)}
-										{success && showSuccessMsg(success)} */}
 										<div className='form-group-profile'>
 											<label htmlFor='name' className='label'>
 												Họ và tên
@@ -168,7 +170,57 @@ function Profile() {
 												)}
 											</div>
 										</div>
-										<Button text='Cập nhật' />
+										<div className='btn btn_mrt'>Cập nhật</div>
+									</form>
+								</div>
+							</div>
+
+							<div className={toggle === 2 ? "tabs-content active-content" : "tabs-content"}>
+								<div className='tabs-heading'>
+									<p>Đặt lại mật khẩu</p>
+								</div>
+								<div className="my-account">
+									<form className='form-profile'>
+										<div className='form-group-profile'>
+											<label htmlFor='name' className='label'>
+												Mật khẩu hiện tại
+											</label>
+											<div className='form-group-input'>
+												<input
+													id='password'
+													name='password'
+													type='password'
+													
+												/>
+											</div>
+										</div>
+										<div className='form-group-profile'>
+											<label htmlFor='phone' className='label'>
+												Mật khẩu mới
+											</label>
+											<div className='form-group-input'>
+												<input
+													id='new_password'
+													name='new_password'
+													type='password'
+													
+												/>
+											</div>
+										</div>
+										<div className='form-group-profile'>
+											<label htmlFor='phone' className='label'>
+												Nhập lại mật khẩu
+											</label>
+											<div className='form-group-input'>
+												<input
+													id='password_confirmation'
+													name='password_confirmation'
+													type='password'
+												
+												/>
+											</div>
+										</div>
+										<div className='btn btn_mrt'>Cập nhật</div>
 									</form>
 								</div>
 							</div>
