@@ -20,8 +20,8 @@ function ProductItem({ product }) {
 					</div>
 
 					<div className='row2'>
-						<div className='reviews'>
-							<Rating />
+						<div className='reviews_1'>
+							<Rating rating={product.rating} />
 							<div className='reviews_qty'>{product.numReviews} reviews</div>
 						</div>
 						<Link to='#' onClick={() => addToCart(product._id)} className='buy'>

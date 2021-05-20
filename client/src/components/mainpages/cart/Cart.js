@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { GlobalState } from '../../../GlobalState';
 import Button from '../utils/Button/Button';
-import Toast from '../utils/Toast/Toast';
+// import Toast from '../utils/Toast/Toast';
 import './Cart.css';
 
 function Cart() {
@@ -12,7 +12,7 @@ function Cart() {
 	const [cart, setCart] = state.userAPI.cart;
 	const [callback, setCallback] = state.userAPI.callback;
 	const [userInfo] = state.userAPI.userInfo;
-	const [isLogged, setIsLogged] = state.userAPI.isLogged;
+	const [isLogged] = state.userAPI.isLogged;
 	const [total, setTotal] = useState(0);
 	const [data, setData] = useState({
 		name: '',
@@ -21,7 +21,7 @@ function Cart() {
 		note: ''
 	});
 
-	const [toast, setToast] = useState(false);
+	// const [toast, setToast] = useState(false);
 
 	const onChangeInput = (e) => {
 		const { name, value } = e.target;

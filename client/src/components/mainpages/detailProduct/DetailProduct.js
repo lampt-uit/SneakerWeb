@@ -4,16 +4,21 @@ import { Link, useParams } from 'react-router-dom';
 import { GlobalState } from '../../../GlobalState';
 import Button from '../utils/Button//Button';
 import './DetailProduct.css';
+import FormInput from '../utils/FormInput/FormInput';
 function DetailProduct() {
 	const state = useContext(GlobalState);
 	// console.log(state);
 	const [products] = state.productAPI.products;
 	const addToCart = state.userAPI.addToCart;
 	const { id } = useParams();
-
+	const [isLogged] = state.userAPI.isLogged;
 	const details = products.filter((product) => {
 		return product._id === id;
 	});
+
+	// console.log(products);
+	// console.log(details);
+
 	return (
 		<>
 			{details.map((product) => (
@@ -37,7 +42,6 @@ function DetailProduct() {
 											<div className='col l-12'>
 												<h2 className='title'>Mô tả</h2>
 											</div>
-
 											<div className='col l-6'>
 												<div className='text-content'>
 													<h2 className='name'>{product.title}</h2>
@@ -53,7 +57,6 @@ function DetailProduct() {
 											</div>
 										</div>
 									</div>
-
 									<div className='home-detail-description'>
 										<div className='row sm-gutter'>
 											<div className='col l-12'>
@@ -78,6 +81,47 @@ function DetailProduct() {
 											</div>
 										</div>
 									</div>
+									<div className='relate-thumb'>
+										<h1>Relate Product</h1>
+										<div>
+											{products.map((product_) => {
+												return product_.category === product.category &&
+													product_._id !== product._id ? (
+													<Link to={`/product/${product_._id}`}>
+														<img src={product_.image[0]} alt='' />
+													</Link>
+												) : null;
+											})}
+										</div>
+									</div>
+									{!isLogged ? (
+										<h2 style={{ marginTop: '50px' }}>
+											Please
+											<Link to='/login'> Login</Link> to rating and comment
+											about product.
+										</h2>
+									) : (
+										<>
+											<h1 style={{ marginTop: '50px' }}>Reviews</h1>
+											<div className='reviews'>
+												<input type='radio' name='rate' id='rd-5' />
+												<label htmlFor='rd-5' className='fas fa-star'></label>
+
+												<input type='radio' name='rate' id='rd-4' />
+												<label htmlFor='rd-4' className='fas fa-star'></label>
+
+												<input type='radio' name='rate' id='rd-3' />
+												<label htmlFor='rd-3' className='fas fa-star'></label>
+
+												<input type='radio' name='rate' id='rd-2' />
+												<label htmlFor='rd-2' className='fas fa-star'></label>
+
+												<input type='radio' name='rate' id='rd-1' />
+												<label htmlFor='rd-1' className='fas fa-star'></label>
+											</div>
+											<FormInput />
+										</>
+									)}
 								</div>
 							</div>
 							<div className='col l-4 m-0 c-0'>
@@ -95,25 +139,29 @@ function DetailProduct() {
 									<Link to='/cart' onClick={() => addToCart(product._id)}>
 										<Button text='Thêm vào giỏ hàng' />
 									</Link>
-									<div className="promotion">
-										<div className="promotion-icon">
-											<i class="fas fa-truck"></i>
+									<div className='promotion'>
+										<div className='promotion-icon'>
+											<i class='fas fa-truck'></i>
 										</div>
-										<div className="promotion-content">
-											<Link className="promotion-link">Learn More</Link>
-											<p className="promotion-text">Miễn phí giao hàng trên 10$</p>		
-										</div>
-									</div>
-									<div className="promotion">
-										<div className="promotion-icon">
-											<i class="fas fa-undo-alt"></i>
-										</div>
-										<div className="promotion-content">
-											<Link className="promotion-link">Trả hàng dễ dàng</Link>
-											<p className="promotion-text">Không đúng kích cỡ hoặc màu sắc? Vui lòng truy cập trang Trả lại hàng & Hoàn tiền của chúng tôi để biết chi tiết</p>		
+										<div className='promotion-content'>
+											<Link className='promotion-link'>Learn More</Link>
+											<p className='promotion-text'>
+												Miễn phí giao hàng trên 10$
+											</p>
 										</div>
 									</div>
-
+									<div className='promotion'>
+										<div className='promotion-icon'>
+											<i class='fas fa-undo-alt'></i>
+										</div>
+										<div className='promotion-content'>
+											<Link className='promotion-link'>Trả hàng dễ dàng</Link>
+											<p className='promotion-text'>
+												Không đúng kích cỡ hoặc màu sắc? Vui lòng truy cập trang
+												Trả lại hàng & Hoàn tiền của chúng tôi để biết chi tiết
+											</p>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
