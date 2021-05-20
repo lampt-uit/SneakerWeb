@@ -13,32 +13,40 @@
     margin-left: 4px;
 }
 .info p{
-    /* color: rgb(51, 51, 51); */
     color: #888;
 }
 .user-page-menu {
     margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 }
-.page-menu-link {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color:  #ececec;
-    border-radius: 4px;
+.tabs {
+    display: flex;
+    width: 100%;
+    padding: 10px 0;
 }
-.page-menu-link i {
-    margin-right: 16px;
-    font-size: 18px;
-    color: #000;
+.tabs-content {
+    display: none;
 }
-.page-menu-link span {
-    color: #000;
-    font-weight: 400;
+
+.tabs i {
+    flex: 1;
+    font-size: 20px;
 }
-.my-account-header {
+.tabs span {
+    flex: 6;
+    text-align: start;
+    margin-left: 6px;
+    font-size: 16px;
+}
+.tabs-heading {
     font-size: 24px;
     margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
 }
-.my-account-profile {
+.my-account {
     background-color: #fff;
     border-radius: 4px;
     padding: 30px 20px;
@@ -65,4 +73,17 @@
     border-radius: 4px;
     height: 34px;
     padding: 6px 12px;
+}
+
+
+.active-tabs {
+    background-color: #ececec;
+}
+
+.active-content {
+    display: block;
+}  
+
+.btn_mrt {
+    margin-top: 20px;
 }

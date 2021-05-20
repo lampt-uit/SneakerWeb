@@ -26,3 +26,7 @@ table {
 	color: red;
 	font-weight: 500;
 }
+
+.tr-boder {
+	border-bottom: 1px solid #000;
+}

@@ -60,7 +60,7 @@ function OrderDetails() {
 				</tr>
 
 				{detailOrder.cart.map((item) => (
-					<tr style={{ backgroundColor: 'white' }}>
+					<tr style={{ backgroundColor: 'white' }} className="tr-boder">
 						<td>
 							<img src={item.image[0]} alt='' />
 						</td>
