@@ -97,7 +97,7 @@ function Profile() {
 								<div className='tabs-heading'>
 									<p>Thông tin tài khoản</p>
 								</div>
-								<div className='my-accounte'>
+								<div className='my-account'>
 									<form className='form-profile' onSubmit={formik.handleSubmit}>
 										<div className='form-group-profile'>
 											<label htmlFor='name' className='label'>
