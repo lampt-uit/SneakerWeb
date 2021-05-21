@@ -3,6 +3,9 @@ const Payments = require('../models/payment.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const sendMail = require('./sendEmail');
+const { CLIENT_URL } = process.env;
+
 const userController = {
 	register: async (req, res) => {
 		try {
@@ -152,7 +155,52 @@ const userController = {
 				}
 			);
 
-			res.json({ message: 'Updated successful' });
+			res.json({ message: 'Information is updated successful' });
+		} catch (error) {
+			return res.status(500).json({ msg: error.message });
+		}
+	},
+	changePassword: async (req, res) => {
+		try {
+			const { password, new_password } = req.body;
+
+			const user = await Users.findById(req.user.id);
+			if (!user) {
+				return res.status(400).json({ message: "User doesn't exists." });
+			}
+
+			const isMatch = await bcrypt.compare(password, user.password);
+
+			if (!isMatch)
+				return res.status(400).json({ message: 'Password is incorrect.' });
+
+			const hashPassword = await bcrypt.hash(new_password, 10);
+
+			await Users.findByIdAndUpdate(
+				{
+					_id: req.user.id
+				},
+				{
+					password: hashPassword
+				}
+			);
+
+			res.json({ message: 'Password is updated successful' });
+		} catch (error) {
+			return res.status(500).json({ msg: error.message });
+		}
+	},
+	forgotPassword: async (req, res) => {
+		try {
+			const { email } = req.body;
+			const user = await Users.findOne({ email });
+			if (!user)
+				return res.status(400).json({ msg: 'This email does not exist.' });
+			const access_token = createAccessToken({ id: user._id });
+
+			const url = `${CLIENT_URL}/user/reset/${access_token}`;
+			sendMail(email, url, 'Reset your password');
+			res.json({ message: 'Re-send the password, please check your email.' });
 		} catch (error) {
 			return res.status(500).json({ msg: error.message });
 		}

@@ -13,5 +13,7 @@ router.get('/all', auth, authAdmin, userController.getAllUser);
 router.patch('/addcart', auth, userController.addCart);
 router.get('/history', auth, userController.history);
 router.patch('/updateUserInfo', auth, userController.updateUserInfo);
+router.patch('/changePassword', auth, userController.changePassword);
+router.post('/forgotPassword', userController.forgotPassword);
 
 module.exports = router;

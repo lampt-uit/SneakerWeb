@@ -1,40 +1,52 @@
-import React from 'react'
-import Button from '../Button/Button'
-import './Modal.css'
-// import { useFormik } from 'formik';
-// import * as Yup from 'yup';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-function Modal({show}) {
+import Button from '../Button/Button';
+import './Modal.css';
+import { isEmail, isEmpty } from '../Validation/Validation';
+import { showErrMsg, showSuccessMsg } from '../Notification/Notification.js';
 
-    // const formik = useFormik({
-    //     initialValues: {
-    //       email: ""
-    //     },
-    //     validationSchema: Yup.object({
-    //       email: Yup.string()
-    //         .required("Required!")
-    //         .email("Invalid email format")
-    //     }),
-      
-    //     onSubmit: values => {
-    //         console.log(values)
-    //     }
-    //     });
+function Modal({ show }) {
+	const [info, setInfo] = useState({ email: '', err: '', success: '' });
+	const { email, err, success } = info;
 
-    return (
-        <div className="modal-wrapper"
-            style={{
-                opacity: show ? '1' : '0',
-                visibility: show ? '' : 'hidden'
-            }}
-        >
-            <div className="modal-header">
-                <h3>Bạn quên mật khẩu?</h3>
-                <p>Nhập địa chỉ email của bạn phía dưới, và nếu tài khoản tồn tại, chúng tôi sẽ gửi cho bạn một đường dẫn để đặt lại mật khẩu.</p>
-            </div>
-            <div className="modal-content">
-                <form className="form-modal">
-                    <div className='form-group'>
+	const handleChangeInput = (e) => {
+		setInfo({ email: e.target.value, err: '', success: '' });
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if (isEmpty(email))
+			return setInfo({
+				...email,
+				err: 'Please fill in email.',
+				success: ''
+			});
+
+		if (!isEmail(email))
+			return setInfo({ ...email, err: 'Invalid email.', success: '' });
+	};
+
+	return (
+		<div
+			className='modal-wrapper'
+			style={{
+				opacity: show ? '1' : '0',
+				visibility: show ? '' : 'hidden'
+			}}
+		>
+			<div className='modal-header'>
+				<h3>Bạn quên mật khẩu?</h3>
+				<p>
+					Nhập địa chỉ email của bạn phía dưới, và nếu tài khoản tồn tại, chúng
+					tôi sẽ gửi cho bạn một đường dẫn để đặt lại mật khẩu.
+				</p>
+			</div>
+			<div className='modal-content'>
+				{err && showErrMsg(err)}
+				{success && showSuccessMsg(success)}
+				<form className='form-modal' onSubmit={handleSubmit}>
+					<div className='form-group'>
 						<label htmlFor='email' className='form-label'>
 							Email
 						</label>
@@ -42,16 +54,17 @@ function Modal({show}) {
 							id='email'
 							name='email'
 							type='email'
-							placeholder=''
-							className='form-control'  
+							required
+							placeholder='Enter email address'
+							className='form-control'
+							onChange={handleChangeInput}
 						/>
-                    </div> 
-                    <Button text="Đặt lại mật khẩu"></Button>
-                 </form>
-            </div>
-        
-        </div>
-    )
+					</div>
+					<Button text='Send to Email' />
+				</form>
+			</div>
+		</div>
+	);
 }
 
-export default Modal
+export default Modal;
