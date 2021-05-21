@@ -1,24 +1,25 @@
-
 import React, { useContext, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+
 import './Profile.css';
-import { Link } from 'react-router-dom';
 import { GlobalState } from '../../../GlobalState';
 import Button from '../utils/Button/Button';
 import Toast from '../utils/Toast/Toast';
-function Profile() {	
+import { showErrMsg } from '../utils/Notification/Notification';
+function Profile() {
 	const [toggle, setToggle] = useState(1);
 	const toggleTab = (index) => {
-		setToggle(index)
-	}
+		setToggle(index);
+	};
 	const _state = useContext(GlobalState);
-	const [toast, setToast] = useState(false);
 	const [userInfo] = _state.userAPI.userInfo;
 	const [state, setState] = useState({ err: '', success: '' });
+	const [state2, setState2] = useState({ err: '', success: '' });
+
 	const [token, setToken] = _state.token;
-	// const { err, success } = state;
+	const { err } = state;
 
 	const formik = useFormik({
 		initialValues: {
@@ -43,9 +44,7 @@ function Profile() {
 					headers: { Authorization: token }
 				});
 				// console.log(res);
-				setState({ err: '', success: res.data.message });
-				setToast(!toast);
-
+				setState2({ ...state2, err: '', success: res.data.message });
 				//
 				const resp = await axios.get('/user/refresh_token');
 				// console.log(resp.data.accesstoken);
@@ -53,14 +52,52 @@ function Profile() {
 			} catch (error) {
 				// console.log(error.response);
 				error.response.data.message &&
-					setState({ err: error.response.data.message, success: '' });
+					setState2({
+						...state2,
+						err: error.response.data.message,
+						success: ''
+					});
 			}
 		}
 	});
+
+	const formik2 = useFormik({
+		initialValues: {
+			password: '',
+			new_password: '',
+			password_confirmation: ''
+		},
+		validationSchema: Yup.object({
+			password: Yup.string()
+				.min(6, 'Vui lòng nhập tối thiểu 6 ký tự')
+				.required('Vui lòng nhập trường này'),
+			new_password: Yup.string()
+				.min(6, 'Vui lòng nhập tối thiểu 6 ký tự')
+				.required('Vui lòng nhập trường này'),
+			password_confirmation: Yup.string()
+				.oneOf([Yup.ref('new_password')], 'Mật khẩu nhập lại không chính xác')
+				.required('Vui lòng nhập trường này!')
+		}),
+		onSubmit: async (values, { resetForm }) => {
+			try {
+				// console.log(values);
+				const res = await axios.patch('/user/changePassword', values, {
+					headers: { Authorization: token }
+				});
+				// console.log(res);
+				setState({ ...state, err: '', success: res.data.message });
+				resetForm();
+			} catch (error) {
+				error.response.data.message &&
+					setState({ ...state, err: error.response.data.message, success: '' });
+			}
+		}
+	});
+
 	return (
 		<div>
-			{/* <Toast type='success' msg='Hello' /> */}
-			{toast && <Toast type='success' msg={state.success} />}
+			{state.success && <Toast type='success' msg={state.success} />}
+			{state2.success && <Toast type='success' msg={state2.success} />}
 			<div className='profile mrt'>
 				<div className='grid wide'>
 					<div className='row'>
@@ -80,24 +117,33 @@ function Profile() {
 									</div>
 								</div>
 								<div className='user-page-menu'>
-									<button className={toggle === 1 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(1)} >
-										<i class="fas fa-user"></i>
+									<button
+										className={toggle === 1 ? 'tabs active-tabs' : 'tabs'}
+										onClick={() => toggleTab(1)}
+									>
+										<i class='fas fa-user'></i>
 										<span>Thông tin tài khoản</span>
 									</button>
-									<button className={toggle === 2 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(2)}>
-										<i class="fas fa-unlock"></i>
+									<button
+										className={toggle === 2 ? 'tabs active-tabs' : 'tabs'}
+										onClick={() => toggleTab(2)}
+									>
+										<i class='fas fa-unlock'></i>
 										<span>Đặt lại mật khẩu</span>
 									</button>
-									
 								</div>
 							</div>
 						</div>
 						<div className='col l-9'>
-							<div className={toggle === 1 ? "tabs-content active-content" : "tabs-content"}>
+							<div
+								className={
+									toggle === 1 ? 'tabs-content active-content' : 'tabs-content'
+								}
+							>
 								<div className='tabs-heading'>
 									<p>Thông tin tài khoản</p>
 								</div>
-								<div className='my-accounte'>
+								<div className='my-account'>
 									<form className='form-profile' onSubmit={formik.handleSubmit}>
 										<div className='form-group-profile'>
 											<label htmlFor='name' className='label'>
@@ -170,19 +216,27 @@ function Profile() {
 												)}
 											</div>
 										</div>
-										<div className='btn btn_mrt'>Cập nhật</div>
+										<Button text='Cập nhật' />
 									</form>
 								</div>
 							</div>
 
-							<div className={toggle === 2 ? "tabs-content active-content" : "tabs-content"}>
+							<div
+								className={
+									toggle === 2 ? 'tabs-content active-content' : 'tabs-content'
+								}
+							>
 								<div className='tabs-heading'>
 									<p>Đặt lại mật khẩu</p>
 								</div>
-								<div className="my-account">
-									<form className='form-profile'>
+								<div className='my-account'>
+									<form
+										className='form-profile'
+										onSubmit={formik2.handleSubmit}
+									>
+										{err && showErrMsg(err)}
 										<div className='form-group-profile'>
-											<label htmlFor='name' className='label'>
+											<label htmlFor='password' className='label'>
 												Mật khẩu hiện tại
 											</label>
 											<div className='form-group-input'>
@@ -190,12 +244,19 @@ function Profile() {
 													id='password'
 													name='password'
 													type='password'
-													
+													onChange={formik2.handleChange}
+													value={formik2.values.password}
 												/>
+												{formik2.errors.password &&
+													formik2.touched.password && (
+														<span className='form-message'>
+															{formik2.errors.password}
+														</span>
+													)}
 											</div>
 										</div>
 										<div className='form-group-profile'>
-											<label htmlFor='phone' className='label'>
+											<label htmlFor='new_password' className='label'>
 												Mật khẩu mới
 											</label>
 											<div className='form-group-input'>
@@ -203,12 +264,19 @@ function Profile() {
 													id='new_password'
 													name='new_password'
 													type='password'
-													
+													onChange={formik2.handleChange}
+													value={formik2.values.new_password}
 												/>
+												{formik2.errors.new_password &&
+													formik2.touched.new_password && (
+														<span className='form-message'>
+															{formik2.errors.new_password}
+														</span>
+													)}
 											</div>
 										</div>
 										<div className='form-group-profile'>
-											<label htmlFor='phone' className='label'>
+											<label htmlFor='password_confirmation' className='label'>
 												Nhập lại mật khẩu
 											</label>
 											<div className='form-group-input'>
@@ -216,11 +284,18 @@ function Profile() {
 													id='password_confirmation'
 													name='password_confirmation'
 													type='password'
-												
+													onChange={formik2.handleChange}
+													value={formik2.values.password_confirmation}
 												/>
+												{formik2.errors.password_confirmation &&
+													formik2.touched.password_confirmation && (
+														<span className='form-message'>
+															{formik2.errors.password_confirmation}
+														</span>
+													)}
 											</div>
 										</div>
-										<div className='btn btn_mrt'>Cập nhật</div>
+										<Button text='Cập nhật' />
 									</form>
 								</div>
 							</div>
