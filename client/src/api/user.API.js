@@ -84,6 +84,7 @@ const UserAPI = (token) => {
 	useEffect(() => {
 		localStorage.setItem('dataCart', JSON.stringify(cart));
 		setCallback(!callback);
+		// eslint-disable-next-line
 	}, [cart]);
 
 	useEffect(() => {

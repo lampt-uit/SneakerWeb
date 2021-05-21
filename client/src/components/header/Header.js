@@ -30,6 +30,7 @@ const Header = () => {
 			window.location.href = '/';
 		}
 	};
+	// console.log(category);
 
 	return (
 		<div className='header'>
@@ -82,14 +83,29 @@ const Header = () => {
 				</Link>
 				<div className='header-bottom_nav'>
 					<ul>
-						{categories.map((category) => (
+						{categories.map((category_) => (
 							<Link to='/product'>
+
 								<li 
-									key={category._id}
-									onClick={() => setCategory(`category=${category._id}`)}
+
+								
+									style={{
+										borderBottom:
+											category === `category=${category_._id}`
+												? '3px solid #636e72'
+												: ''
+									}}					key={category._id}
+									onClick={() => setCategory(`category=${category_._id}`)}
 								>
-									<h4>{category.name}</h4>
-								</li>
+									<h4
+										style={{
+											fontWeight:
+												category === `category=${category_._id}` ? '700' : ''
+										}}
+									>
+										{category_.name}
+									</h4>
+							</li>
 							</Link>
 						))}
 					</ul>

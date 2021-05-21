@@ -36,11 +36,11 @@
 }
 
 .toast--success {
-	border-color: #47d864;
+	border-color: #03a9ff;
 }
 
 .toast--success .toast__icon {
-	color: #47d864;
+	color: #03a9ff;
 }
 
 .toast--err {
