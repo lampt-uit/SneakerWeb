@@ -10,7 +10,8 @@ import Cart from './cart/Cart';
 import Profile from './profile/Profile';
 import History from './history/OrderHistory';
 import HistoryDetail from './history/OrderDetails';
-import ForgotPassword from './forgotPassword/ForgotPassword'
+import ForgotPassword from './forgotPassword/ForgotPassword';
+import ResetPassword from './ResetPassword/ResetPassword';
 const Pages = () => {
 	return (
 		<Switch>
@@ -23,7 +24,9 @@ const Pages = () => {
 			<Route path='/profile' exact component={Profile}></Route>
 			<Route path='/history' exact component={History}></Route>
 			<Route path='/history/:id' exact component={HistoryDetail}></Route>
-			<Route path='/forgot' exact component={ForgotPassword}></Route>
+			<Route path='/reset/:token' exact component={ForgotPassword}></Route>
+			<Route path='/forgot/' exact component={ResetPassword}></Route>
+
 			{/* <Route path='*' exact component={NotFound}></Route> */}
 		</Switch>
 	);
