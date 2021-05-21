@@ -99,7 +99,7 @@ function Cart() {
 					textAlign: 'center',
 					fontSize: '5rem',
 					paddingTop: '147px',
-					marginBottom: '90px'
+					marginBottom: '114px'
 				}}
 			>
 				Giỏ hàng trống

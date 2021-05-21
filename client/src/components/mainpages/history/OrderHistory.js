@@ -26,7 +26,7 @@ function OrderHistory() {
 	if (history.length === 0)
 		return (
 			<h2
-				style={{ textAlign: 'center', fontSize: '5rem', paddingTop: '100px' }}
+				style={{ textAlign: 'center', fontSize: '5rem', paddingTop: '147px',marginBottom: '114px' }}
 			>
 				Bạn chưa mua hàng
 			</h2>
