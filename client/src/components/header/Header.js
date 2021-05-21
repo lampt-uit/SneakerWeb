@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 
 import { GlobalState } from '../../GlobalState';
@@ -84,7 +84,7 @@ const Header = () => {
 					<ul>
 						{categories.map((category) => (
 							<Link to='/product'>
-								<li
+								<li 
 									key={category._id}
 									onClick={() => setCategory(`category=${category._id}`)}
 								>
