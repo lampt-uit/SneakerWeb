@@ -71,18 +71,23 @@ function AdminPayments() {
 			{status.success && <Toast type='success' msg={status.success} />}
 			<div className='admin-payments'>
 				<h1>Orders Management</h1>
-				<div className='info'>
-					<span>Total Paymnents {payments.length}</span>&nbsp;
-					<span>Unpaid Paymnents {unPaid.length}</span>&nbsp;
-					<span>Paid Paymnents {paid.length}</span>
-				</div>
 				<div className='grid wide'>
 					<div className='row'>
-						<div className='col l-4'></div>
-						<div className='col l-8'>
+						<div className='col l-3'>
+							<div className='info'>
+								<div>Total Paymnents {payments.length}</div>
+								<div>Unpaid Paymnents {unPaid.length}</div>
+								<div>Paid Paymnents {paid.length}</div>
+							</div>
+						</div>
+						<div className='col l-9'>
 							<table>
 								<thead>
-									<tr>
+									<tr
+										style={{
+											fontSize: '12px'
+										}}
+									>
 										<th>Ordinal numbers</th>
 										<th>Order's code</th>
 										<th>Customer's code</th>
