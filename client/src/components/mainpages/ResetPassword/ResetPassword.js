@@ -32,13 +32,13 @@ function ResetPassword() {
 		}
 	});
 	return (
-		<div className='reset-password'>
+		<div className='reset-password mrt mrb'>
 			<div className='grid wide'>
 				<div className='row'>
 					<div className='col l-6'>
 						<form
 							action=''
-							className='form-forgot'
+							className='form-reset'
 							onSubmit={formik.handleSubmit}
 						>
 							<h2 className='heading-forgot'>Please enter your email</h2>
@@ -66,7 +66,8 @@ function ResetPassword() {
 						</form>
 					</div>
 					<div className='col l-6'>
-						<h1>This is from forgot password</h1>
+						<h1>BẠN QUÊN MẬT KHẨU ?</h1>
+						<p>Thật dễ dàng để reset mật khẩu của một tài khoản. Hãy nhập địa chỉ email của bạn để được đặt lại mật khẩu</p>		
 					</div>
 				</div>
 			</div>
