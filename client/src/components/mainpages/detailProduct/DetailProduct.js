@@ -1,5 +1,5 @@
 import { React, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 
 import { GlobalState } from '../../../GlobalState';
 import Button from '../utils/Button//Button';
@@ -7,6 +7,7 @@ import './DetailProduct.css';
 import FormInput from '../utils/FormInput/FormInput';
 function DetailProduct() {
 	const state = useContext(GlobalState);
+	const history = useHistory();
 	// console.log(state);
 	const [products] = state.productAPI.products;
 	const addToCart = state.userAPI.addToCart;
@@ -25,8 +26,8 @@ function DetailProduct() {
 				<div className='home-detail mrt mrb'>
 					<div className='grid wide'>
 						<div className='breadcrumb'>
-							<Link to='#'>
-								<i className='fas fa-arrow-left'></i>Trở lại
+							<Link to='#' onClick={() => history.goBack()}>
+								<i className='fas fa-arrow-left'></i>Back
 							</Link>
 						</div>
 						<div className='row'>
@@ -40,7 +41,7 @@ function DetailProduct() {
 									<div className='home-detail-description'>
 										<div className='row sm-gutter'>
 											<div className='col l-12'>
-												<h2 className='title'>Mô tả</h2>
+												<h2 className='title'>Description</h2>
 											</div>
 											<div className='col l-6'>
 												<div className='text-content'>
@@ -60,22 +61,22 @@ function DetailProduct() {
 									<div className='home-detail-description'>
 										<div className='row sm-gutter'>
 											<div className='col l-12'>
-												<h2 className='title'>thông số</h2>
+												<h2 className='title'>Content</h2>
 											</div>
 
 											<div className='col l-6'>
 												<ul className='list-parameters'>
-													<li>Vừa vặn như đi tất</li>
+													<li>Fits like socks</li>
 
-													<li>Có dây giày</li>
+													<li>With shoelaces</li>
 
-													<li>Lớp lót bằng vải dệt</li>
+													<li>Textile lining</li>
 												</ul>
 											</div>
 											<div className='col l-6'>
 												<ul className='list-parameters'>
-													<li>Trọng lượng: 340 g</li>
-													<li>Đệm gót giày hình chữ S</li>
+													<li>Weight: 340 g</li>
+													<li>S-shaped heel pad</li>
 													<li>Primeblue</li>
 												</ul>
 											</div>
@@ -129,7 +130,7 @@ function DetailProduct() {
 									<h2 className='detail-name'>{product.title}</h2>
 									<p className='detail-price'>$ {product.price}</p>
 									<div className='detail-size'>
-										<h3 className='name-size'>Size có sẳn</h3>
+										<h3 className='name-size'>Sizes Available</h3>
 										<div className='container-size'>
 											{product.size.map((size, index) => (
 												<button key={index}>{size}</button>
@@ -137,7 +138,7 @@ function DetailProduct() {
 										</div>
 									</div>
 									<Link to='/cart' onClick={() => addToCart(product._id)}>
-										<Button text='Thêm vào giỏ hàng' />
+										<Button text='Add to my cart' />
 									</Link>
 									<div className='promotion'>
 										<div className='promotion-icon'>
@@ -145,9 +146,7 @@ function DetailProduct() {
 										</div>
 										<div className='promotion-content'>
 											<Link className='promotion-link'>Learn More</Link>
-											<p className='promotion-text'>
-												Miễn phí giao hàng trên 10$
-											</p>
+											<p className='promotion-text'>Free delivery over 10$</p>
 										</div>
 									</div>
 									<div className='promotion'>
@@ -155,10 +154,12 @@ function DetailProduct() {
 											<i class='fas fa-undo-alt'></i>
 										</div>
 										<div className='promotion-content'>
-											<Link className='promotion-link'>Trả hàng dễ dàng</Link>
+											<Link className='promotion-link'>
+												Easy return product
+											</Link>
 											<p className='promotion-text'>
-												Không đúng kích cỡ hoặc màu sắc? Vui lòng truy cập trang
-												Trả lại hàng & Hoàn tiền của chúng tôi để biết chi tiết
+												Not the right size or colour? Visit our returns page for
+												details.
 											</p>
 										</div>
 									</div>

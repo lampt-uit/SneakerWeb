@@ -102,53 +102,6 @@ const Home = () => {
 									/>
 								</div>
 							))}
-							{/* <div>
-								<Carousel image={Image1} title='Converse high 2' price='$12' />
-							</div>
-							<div>
-								<Carousel
-									image={Image2}
-									title='Archive flames chuck 70'
-									price='$89'
-								/>
-							</div>
-							<div>
-								<Carousel image={Image3} title='Hu NND' price='$20' />
-							</div>
-							<div>
-								<Carousel
-									image={Image4}
-									title='XZ 8000 W superarth'
-									price='$79'
-								/>
-							</div>
-
-							<div>
-								<Carousel
-									image={Image5}
-									title='lace-up front mesh trainers '
-									price='$19'
-								/>
-							</div>
-							<div>
-								<Carousel image={Image6} title='SHOES ATHLETIC' price='$26' />
-							</div>
-							<div>
-								<Carousel
-									image={Image7}
-									title='FASHION ADIDAS SHOES'
-									price='$21'
-								/>
-							</div>
-							<div>
-								<Carousel image={Image8} title='ozweego' price='$32' />
-							</div>
-							<div>
-								<Carousel image={Image9} title='response sr' price='$12' />
-							</div>
-							<div>
-								<Carousel image={Image10} title='grand court se' price='$52' />
-							</div> */}
 						</Slider>
 					</div>
 

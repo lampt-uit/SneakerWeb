@@ -4,7 +4,8 @@ import axios from 'axios';
 
 import { GlobalState } from '../../../GlobalState';
 import Button from '../utils/Button/Button';
-// import Toast from '../utils/Toast/Toast';
+import { isEmpty, isPhone } from '../utils/Validation/Validation.js';
+import { showErrMsg } from '../utils/Notification/Notification';
 import './Cart.css';
 
 function Cart() {
@@ -14,14 +15,15 @@ function Cart() {
 	const [userInfo] = state.userAPI.userInfo;
 	const [isLogged] = state.userAPI.isLogged;
 	const [total, setTotal] = useState(0);
+	const [quantity, setQuantity] = useState(0);
+	const [status, setStatus] = useState('');
 	const [data, setData] = useState({
 		name: '',
 		address: '',
 		phone: '',
 		note: ''
 	});
-
-	// const [toast, setToast] = useState(false);
+	const { name, address, phone } = data;
 
 	const onChangeInput = (e) => {
 		const { name, value } = e.target;
@@ -36,13 +38,22 @@ function Cart() {
 			}, 0);
 			setTotal(total);
 		};
+		const getQuantity = () => {
+			const quantity = cart.reduce((prev, item) => {
+				return prev + item.count;
+			}, 0);
+			setQuantity(quantity);
+		};
 		getTotal();
+		getQuantity();
 	}, [cart]);
 
 	const increase = (id) => {
 		cart.forEach((item) => {
 			if (item._id === id) {
-				item.count += 1;
+				item.count === item.stock
+					? (item.count = item.stock)
+					: (item.count += 1);
 			}
 		});
 		setCart([...cart]);
@@ -58,7 +69,9 @@ function Cart() {
 	};
 
 	const remove = (id) => {
-		if (window.confirm('Bạn có muốn xóa sản phẩm này khỏi giỏ hàng ?')) {
+		if (
+			window.confirm('Do you want to delete this product from your cart? ?')
+		) {
 			cart.forEach((item, index) => {
 				if (item._id === id) {
 					cart.splice(index, 1);
@@ -80,7 +93,14 @@ function Cart() {
 
 	const id = userInfo._id;
 	const proceed = async () => {
-		if (window.confirm('Bạn đã chắc chắn muốn đặt hàng chưa ?')) {
+		if (!isLogged) {
+			if (isEmpty(name) || isEmpty(phone) || isEmpty(address))
+				return setStatus('Please fill in all fields.');
+			if (!isPhone(phone))
+				return setStatus('Please enter the correct phone number');
+		}
+
+		if (window.confirm('Are you sure you want to order? ?')) {
 			try {
 				setCart([]);
 				!isLogged
@@ -102,7 +122,7 @@ function Cart() {
 					marginBottom: '114px'
 				}}
 			>
-				Giỏ hàng trống
+				Cart Empty
 			</h2>
 		);
 	}
@@ -112,8 +132,8 @@ function Cart() {
 				<div className='row'>
 					<div className='col l-8'>
 						<div className='cart-title'>
-							<h4>Giỏ hàng của bạn</h4>
-							<Link to='/product'>Tiếp tục mua hàng</Link>
+							<h4>Your cart</h4>
+							<Link to='/product'>Continue shopping</Link>
 						</div>
 						{cart.map((product) => (
 							<div className='row cart-detail'>
@@ -128,7 +148,7 @@ function Cart() {
 											<h3 className='content-title'>{product.title}</h3>
 											<span className='content-price'>${product.price}</span>
 											<div className='content-stock'>
-												Còn lại trong kho: {product.stock}
+												In Stock: {product.stock}
 											</div>
 										</div>
 
@@ -139,7 +159,7 @@ function Cart() {
 												<Link onClick={() => increase(product._id)}>+</Link>
 											</div>
 
-											<span>Chọn Size: </span>
+											<span>Select Size: </span>
 											<select
 												className='select-size'
 												onChange={(e) =>
@@ -175,12 +195,13 @@ function Cart() {
 					</div>
 					<div className='col l-4'>
 						<div className='cart-warpper'>
-							<h1>Thông tin nhận hàng </h1>
+							<h1>Delivery information </h1>
 							<div className='address'>
 								<form className='form'>
+									{status && showErrMsg(status)}
 									<div className='form-group'>
 										<label htmlFor='name' className='form-label'>
-											Họ và tên <span style={{ color: 'crimson' }}>*</span>
+											Full Name <span style={{ color: 'crimson' }}>*</span>
 										</label>
 										<input
 											id='name'
@@ -193,7 +214,7 @@ function Cart() {
 									</div>
 									<div className='form-group'>
 										<label htmlFor='phone' className='form-label'>
-											Số điện thoại <span style={{ color: 'crimson' }}>*</span>
+											Phone <span style={{ color: 'crimson' }}>*</span>
 										</label>
 										<input
 											id='phone'
@@ -206,7 +227,7 @@ function Cart() {
 									</div>
 									<div className='form-group'>
 										<label htmlFor='address' className='form-label'>
-											Địa chỉ <span style={{ color: 'crimson' }}>*</span>
+											Address <span style={{ color: 'crimson' }}>*</span>
 										</label>
 										<input
 											id='address'
@@ -219,7 +240,7 @@ function Cart() {
 									</div>
 									<div className='form-group'>
 										<label htmlFor='note' className='form-label'>
-											Ghi chú
+											Note
 										</label>
 										<textarea
 											name='note'
@@ -234,18 +255,76 @@ function Cart() {
 						</div>
 						<div className='order'>
 							<div className='cart-warpper'>
-								<h1>Thông tin đơn hàng</h1>
+								<h1>Order Information</h1>
 								<div className='order-content'>
-									<p>Tổng số sản phẩm: 8</p>
-									<p>Hình thức thanh toán: Trục tiếp</p>
-									<p>Hình thức giao hàng: Giao hành nhanh</p>
-									<p>Chương trình khuyến mãi: Không</p>
-									<h2>Tổng tiền: $ {total}</h2>
+									<p>
+										Total number of products:{' '}
+										<span
+											style={{
+												color: 'crimson',
+												fontWeight: 500,
+												fontSize: '20px'
+											}}
+										>
+											{quantity}
+										</span>
+									</p>
+									<p>
+										Payment method:{' '}
+										<span
+											style={{
+												color: 'crimson',
+												fontWeight: 500,
+												fontSize: '20px'
+											}}
+										>
+											Directly
+										</span>
+									</p>
+									<p>
+										Delivery method:
+										<span
+											style={{
+												color: 'crimson',
+												fontWeight: 500,
+												fontSize: '20px'
+											}}
+										>
+											Fast delivery
+										</span>{' '}
+									</p>
+									<p>
+										Promotion:
+										<span
+											style={{
+												color: 'crimson',
+												fontWeight: 500,
+												fontSize: '20px'
+											}}
+										>
+											No
+										</span>{' '}
+									</p>
+									<h2>
+										Total amount:
+										<span
+											style={{
+												color: 'crimson',
+												fontWeight: 700,
+												fontSize: '24px'
+											}}
+										>
+											$ {total}
+										</span>
+									</h2>
 								</div>
 							</div>
 						</div>
 						<div onClick={() => proceed()}>
-							<Button text='Thanh toán' />
+							<Button
+								text='
+Order confirmation'
+							/>
 						</div>
 					</div>
 				</div>

@@ -12,6 +12,11 @@ import History from './history/OrderHistory';
 import HistoryDetail from './history/OrderDetails';
 import ForgotPassword from './forgotPassword/ForgotPassword';
 import ResetPassword from './ResetPassword/ResetPassword';
+import AdminProducts from './adminProducts/AdminProducts';
+import AdminPayments from './adminPayments/AdminPayments';
+import AdminCustomers from './adminCustomer/AdminCustomer.js';
+import AdminCategory from './adminCategory/AdminCategory';
+
 const Pages = () => {
 	return (
 		<Switch>
@@ -25,7 +30,11 @@ const Pages = () => {
 			<Route path='/history' exact component={History}></Route>
 			<Route path='/history/:id' exact component={HistoryDetail}></Route>
 			<Route path='/reset/:token' exact component={ForgotPassword}></Route>
-			<Route path='/forgot/' exact component={ResetPassword}></Route>
+			<Route path='/forgot' exact component={ResetPassword}></Route>
+			<Route path='/admin/products' exact component={AdminProducts}></Route>
+			<Route path='/admin/payments' exact component={AdminPayments}></Route>
+			<Route path='/admin/customers' exact component={AdminCustomers}></Route>
+			<Route path='/admin/categories' exact component={AdminCategory}></Route>
 
 			{/* <Route path='*' exact component={NotFound}></Route> */}
 		</Switch>

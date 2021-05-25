@@ -15,6 +15,14 @@
 	height: 100%;
 	object-fit: fill;
 }
+
+.card-link-img-dis {
+	display: block;
+	height: 300px;
+	width: 100%;
+	object-fit: fill;
+}
+
 .card-detail {
 	font-size: 14px;
 	font-weight: 500;

@@ -17,8 +17,8 @@ function ResetPassword() {
 		validationSchema: Yup.object({
 			email: Yup.string()
 				.trim()
-				.email('Email không hợp lệ')
-				.required('Vui lòng nhập trường này')
+				.email('Email invalid')
+				.required('Please enter this field.')
 		}),
 		onSubmit: async (values) => {
 			try {

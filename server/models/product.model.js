@@ -33,7 +33,7 @@ const productSchema = mongoose.Schema(
 		},
 		size: {
 			type: Array,
-			default: []
+			default: ['38', '39', '40', '41', '42', '43', '44', '45']
 		},
 		category: {
 			type: String,

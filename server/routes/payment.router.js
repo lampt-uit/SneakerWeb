@@ -9,4 +9,9 @@ router
 	.get(auth, authAdmin, paymentController.getPayments)
 	.post(paymentController.createPayment);
 
+router
+	.route('/payment/:id')
+	.patch(auth, authAdmin, paymentController.updateStatus)
+	.delete(auth, authAdmin, paymentController.deletePayment);
+
 module.exports = router;

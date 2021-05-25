@@ -15,13 +15,13 @@ function Banner() {
 					alt=''
 					className='logo'
 				/>
-				<h2>STAN SMITH, MÃI MÃI</h2>
+				<h2>STAN SMITH, FOREVER</h2>
 				<p>
-					Phiên bản bền vững từ giày Stan Smith biểu tượng, lấy cảm hứng từ chú
-					ếch Kermit.
+					Sustainable version of the iconic Stan Smith shoe, inspired by uncle
+					Kermit frog.
 				</p>
 				<Link to='/product'>
-					<Button text='Mua ngay' />
+					<Button text='Go to Buy Now' />
 				</Link>
 			</div>
 		</div>

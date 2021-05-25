@@ -18,17 +18,17 @@ function Register() {
 			name: ''
 		},
 		validationSchema: Yup.object({
-			name: Yup.string().required('Vui lòng nhập trường này'),
+			name: Yup.string().required('Please enter this field.'),
 			email: Yup.string()
 				.trim()
-				.email('Email không hợp lệ')
-				.required('Vui lòng nhập trường này'),
+				.email('Email invalid')
+				.required('Please enter this field.'),
 			password: Yup.string()
-				.min(6, 'Vui lòng nhập tối thiểu 6 ký tự')
-				.required('Vui lòng nhập trường này'),
+				.min(6, 'Please enter at least 6 characters.')
+				.required('Please enter this field.'),
 			password_confirmation: Yup.string()
-				.oneOf([Yup.ref('password')], 'Mật khẩu nhập lại không chính xác')
-				.required('Vui lòng nhập trường này!')
+				.oneOf([Yup.ref('password')], 'Re-entered password is incorrect.')
+				.required('Please enter this field.')
 		}),
 		onSubmit: async (values, { resetForm }) => {
 			try {
@@ -51,12 +51,12 @@ function Register() {
 				<div className='row app-content'>
 					<div className='col l-6 m-12 c-12'>
 						<form action='' className='form' onSubmit={formik.handleSubmit}>
-							<h2 className='heading heading-register'>Đăng ký</h2>
+							<h2 className='heading heading-register'>Register</h2>
 							{err && showErrMsg(err)}
 							{success && showSuccessMsg(success)}
 							<div className='form-group'>
 								<label htmlFor='name' className='form-label'>
-									Tên đầy đủ
+									Full Name
 								</label>
 								<input
 									id='name'
@@ -90,7 +90,7 @@ function Register() {
 							</div>
 							<div className='form-group'>
 								<label htmlFor='password' className='form-label'>
-									Mật khẩu
+									Password
 								</label>
 								<input
 									id='password'
@@ -98,7 +98,7 @@ function Register() {
 									type='password'
 									onChange={formik.handleChange}
 									value={formik.values.password}
-									placeholder='Nhập mật khẩu'
+									placeholder='Enter password'
 									className='form-control'
 								/>
 
@@ -108,7 +108,7 @@ function Register() {
 							</div>
 							<div className='form-group'>
 								<label htmlFor='password_confirmation' className='form-label'>
-									Nhập lại mật khẩu
+									Confirm Password
 								</label>
 								<input
 									id='password_confirmation'
@@ -116,7 +116,7 @@ function Register() {
 									type='password'
 									onChange={formik.handleChange}
 									value={formik.values.password_confirmation}
-									placeholder='Nhập lại mật khẩu'
+									placeholder='Enter password again'
 									className='form-control'
 								/>
 
@@ -128,35 +128,33 @@ function Register() {
 									)}
 							</div>
 
-							<Button text='Đăng kí' />
+							<Button text='Register' />
 						</form>
 					</div>
 					<div className='col l-6 m-12 c-12'>
 						<div className='reason'>
-							<h2 className='heading'>Tạo một tài khoản</h2>
-							<p className='desc'>
-								Đăng kí một tài khoản sẽ giúp bạn truy cập:
-							</p>
+							<h2 className='heading'>CREATE AN ACCOUNT</h2>
+							<p className='desc'>Your Global Login will give you access to:</p>
 							<div className='content'>
 								<ul>
 									<li>
 										<i className='fal fa-check'></i>
 										<span>
-											Một lần đăng nhập chung duy nhất để tương tác với các sản
-											phẩm và dịch vụ của của hàng
+											A single global login to interact with adidas products and
+											services
 										</span>
 									</li>
 									<li>
 										<i className='fal fa-check'></i>
-										<span>Thanh toán nhanh hơn</span>
+										<span>Checkout faster</span>
 									</li>
 									<li>
 										<i className='fal fa-check'></i>
-										<span>Xem lịch sử đặt hàng riêng của bạn</span>
+										<span>View your personal order history</span>
 									</li>
 									<li>
 										<i className='fal fa-check'></i>
-										<span>Thêm hoặc thay đổi tùy chọn email</span>
+										<span>Add or change email preferences</span>
 									</li>
 								</ul>
 							</div>
