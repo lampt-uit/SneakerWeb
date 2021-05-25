@@ -8,6 +8,7 @@ const UserAPI = (token) => {
 	const [userInfo, setUserInfo] = useState([]);
 	const [pro, setPro] = useState([]);
 	const [history, setHistory] = useState([]);
+	const [callback2, setCallback2] = useState(false);
 
 	useEffect(() => {
 		if (token) {
@@ -58,7 +59,7 @@ const UserAPI = (token) => {
 			setPro(res.data.products);
 		};
 		getProducts();
-	}, []);
+	}, [callback2]);
 
 	const addToCart = (id) => {
 		const check = cart.every((item) => {
@@ -118,6 +119,7 @@ const UserAPI = (token) => {
 		userInfo: [userInfo, setUserInfo],
 		cart: [cart, setCart],
 		callback: [callback, setCallback],
+		callback2: [callback2, setCallback2],
 		history: [history, setHistory],
 		pro: [pro, setPro],
 		addToCart

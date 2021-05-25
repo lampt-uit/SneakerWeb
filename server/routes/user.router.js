@@ -16,5 +16,12 @@ router.patch('/updateUserInfo', auth, userController.updateUserInfo);
 router.patch('/changePassword', auth, userController.changePassword);
 router.post('/forgotPassword', userController.forgotPassword);
 router.post('/resetPassword', auth, userController.resetPassword);
+router.delete('/delete/:id', auth, authAdmin, userController.deleteUser);
+router.patch('/updateRole/:id', auth, authAdmin, userController.updateRole);
+router.post('/create', auth, authAdmin, userController.createUser);
+router.patch('/updateUser/:id', auth, authAdmin, userController.updateUser);
+router.post('/google_login', userController.googleLogin);
+router.post('/facebook_login', userController.facebookLogin);
+router.post('/email_subscribe', userController.receiveEmail);
 
 module.exports = router;

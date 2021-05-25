@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 
 import { GlobalState } from '../../GlobalState';
@@ -47,15 +47,35 @@ const Header = () => {
 							</Link>
 							<ul className='dropdown'>
 								<li>
-									<Link to='/profile'>Thông tin</Link>
+									<Link to='/profile'>Information</Link>
 								</li>
-								<li>
-									<Link to='/history'>Đơn hàng</Link>
-								</li>
+								{userInfo.role ? (
+									<>
+										<li>
+											<Link to='/history'>Order</Link>
+										</li>
+										<li>
+											<Link to='/admin/products'>Products Management</Link>
+										</li>
+										<li>
+											<Link to='/admin/payments'>Orders Management</Link>
+										</li>
+										<li>
+											<Link to='/admin/categories'>Categories Management</Link>
+										</li>
+										<li>
+											<Link to='/admin/customers'>Users Management</Link>
+										</li>
+									</>
+								) : (
+									<li>
+										<Link to='/history'>Orders</Link>
+									</li>
+								)}
 
 								<li>
 									<Link to='/logout' onClick={handleLogout}>
-										Đăng xuất
+										Logout
 									</Link>
 								</li>
 							</ul>
@@ -79,22 +99,24 @@ const Header = () => {
 					className='header-bottom_logo'
 					onClick={() => handleReset()}
 				>
-					<img src={Logo} alt='' width='100' />
+					{userInfo.role ? (
+						<h1 style={{ marginLeft: '20px' }}>ADMIN</h1>
+					) : (
+						<img src={Logo} alt='' width='100' />
+					)}
 				</Link>
 				<div className='header-bottom_nav'>
 					<ul>
 						{categories.map((category_) => (
 							<Link to='/product'>
-
-								<li 
-
-								
+								<li
 									style={{
 										borderBottom:
 											category === `category=${category_._id}`
 												? '3px solid #636e72'
 												: ''
-									}}					key={category._id}
+									}}
+									key={category._id}
 									onClick={() => setCategory(`category=${category_._id}`)}
 								>
 									<h4
@@ -105,7 +127,7 @@ const Header = () => {
 									>
 										{category_.name}
 									</h4>
-							</li>
+								</li>
 							</Link>
 						))}
 					</ul>
@@ -114,7 +136,7 @@ const Header = () => {
 					<div className='form-input'>
 						<input
 							type='text'
-							placeholder='Tìm kiếm'
+							placeholder='Search'
 							value={search}
 							onChange={(e) => setSearch(e.target.value.toLowerCase())}
 						/>

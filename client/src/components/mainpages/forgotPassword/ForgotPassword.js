@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import axios from 'axios';
 
 import Button from '../utils/Button/Button';
-import Toast from '../utils/Toast/Toast';
 import './ForgotPassword.css';
 import { showErrMsg, showSuccessMsg } from '../utils/Notification/Notification';
 function ForgotPassword() {
@@ -19,11 +18,11 @@ function ForgotPassword() {
 		},
 		validationSchema: Yup.object({
 			password: Yup.string()
-				.min(6, 'Vui lòng nhập tối thiểu 6 ký tự')
-				.required('Vui lòng nhập trường này'),
+				.min(6, 'Please enter at least 6 characters.')
+				.required('Please enter this field.'),
 			password_confirmation: Yup.string()
-				.oneOf([Yup.ref('password')], 'Mật khẩu nhập lại không chính xác')
-				.required('Vui lòng nhập trường này!')
+				.oneOf([Yup.ref('password')], 'Re-entered password is incorrect.')
+				.required('Please enter this field.')
 		}),
 		onSubmit: async (values, { resetForm }) => {
 			// console.log(values.password);
@@ -51,18 +50,18 @@ function ForgotPassword() {
 								className='form-forgot'
 								onSubmit={formik.handleSubmit}
 							>
-								<h2 className='heading-forgot'>Tạo mật khẩu mới</h2>
+								<h2 className='heading-forgot'>Create a new password</h2>
 								{err && showErrMsg(err)}
 								{success && showSuccessMsg(success)}
 								<div className='form-group'>
 									<label htmlFor='password' className='form-label'>
-										Mật khẩu
+										Password
 									</label>
 									<input
 										id='password'
 										name='password'
 										type='password'
-										placeholder=''
+										placeholder='Please enter new password'
 										className='form-control'
 										onChange={formik.handleChange}
 										value={formik.values.password}
@@ -75,13 +74,13 @@ function ForgotPassword() {
 								</div>
 								<div className='form-group'>
 									<label htmlFor='password_confirmation' className='form-label'>
-										Nhập lại mật khẩu
+										Confirm password
 									</label>
 									<input
 										id='password_confirmation'
 										name='password_confirmation'
 										type='password'
-										placeholder=''
+										placeholder='Please enter new password again'
 										className='form-control'
 										onChange={formik.handleChange}
 										value={formik.values.password_confirmation}
@@ -94,7 +93,7 @@ function ForgotPassword() {
 										)}
 								</div>
 
-								<Button text='Cập nhật' />
+								<Button text='Update' />
 							</form>
 						</div>
 						<div className='col l-6'>

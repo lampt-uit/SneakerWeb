@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
 
 import './Login.css';
 import { showErrMsg, showSuccessMsg } from '../utils/Notification/Notification';
@@ -10,9 +12,6 @@ import Button from '../utils/Button/Button';
 function Login() {
 	const [state, setState] = useState({ err: '', success: '' });
 	const { err, success } = state;
-
-	const [show, setShow] = useState(false);
-	const closeModalHandler = () => setShow(false);
 
 	const formik = useFormik({
 		initialValues: {
@@ -22,11 +21,11 @@ function Login() {
 		validationSchema: Yup.object({
 			email: Yup.string()
 				.trim()
-				.email('Email không hợp lệ')
-				.required('Vui lòng nhập trường này'),
+				.email('Email invalid')
+				.required('Please enter this field.'),
 			password: Yup.string()
-				.min(6, 'Vui lòng nhập tối thiểu 6 ký tự')
-				.required('Vui lòng nhập trường này')
+				.min(6, 'Please enter at least 6 characters.')
+				.required('Please enter this field.')
 		}),
 		onSubmit: async (values, { resetForm }) => {
 			try {
@@ -44,6 +43,37 @@ function Login() {
 		}
 	});
 
+	const responseGoogle = async (response) => {
+		// console.log(response);
+		try {
+			const res = await axios.post('/user/google_login', {
+				tokenId: response.tokenId
+			});
+			setState({ err: '', success: res.data.msg });
+			localStorage.setItem('firstLogin', true);
+			window.location.href = '/';
+		} catch (error) {
+			error.response.data.message &&
+				setState({ err: error.response.data.message, success: '' });
+		}
+	};
+
+	const responseFacebook = async (response) => {
+		try {
+			const { accessToken, userID } = response;
+			const res = await axios.post('/user/facebook_login', {
+				accessToken,
+				userID
+			});
+			setState({ err: '', success: res.data.msg });
+			localStorage.setItem('firstLogin', true);
+			window.location.href = '/';
+		} catch (error) {
+			error.response.data.message &&
+				setState({ err: error.response.data.msg, success: '' });
+		}
+	};
+
 	return (
 		<>
 			<div className='login mrt mrb'>
@@ -51,8 +81,8 @@ function Login() {
 					<div className='row app-content'>
 						<div className='col l-6 m-12 c-12'>
 							<form className='form' onSubmit={formik.handleSubmit}>
-								<h2 className='heading'>Đăng nhập</h2>
-								<Link to='/forgot'>Bạn quên mật khẩu?</Link>
+								<h2 className='heading'>Log In</h2>
+								<Link to='/forgot'>Forgotten Your Password?</Link>
 
 								{err && showErrMsg(err)}
 								{success && showSuccessMsg(success)}
@@ -75,7 +105,7 @@ function Login() {
 								</div>
 								<div className='form-group'>
 									<label htmlFor='password' className='form-label'>
-										Mật khẩu
+										Password
 									</label>
 									<input
 										id='password'
@@ -92,57 +122,73 @@ function Login() {
 										</span>
 									)}
 								</div>
-								<Button text='Đăng nhập' />
+								<Button text='Log In' />
 							</form>
+							<div className='hr'>
+								<span>Or Login with</span>
+							</div>
+							<div className='social'>
+								<GoogleLogin
+									clientId='685392321876-7ds2rdi6g17dhg16qtn12r2t96c1ljp4.apps.googleusercontent.com'
+									buttonText='Login with Google'
+									onSuccess={responseGoogle}
+									onFailure={responseGoogle}
+									cookiePolicy={'single_host_origin'}
+								/>
+								<FacebookLogin
+									appId='296406698823480'
+									autoLoad={false}
+									fields='name,email,picture'
+									callback={responseFacebook}
+								/>
+							</div>
 						</div>
 						<div className='col l-6 m-12 c-12'>
 							<div className='reason'>
-								<h2 className='heading'>Tạo một tài khoản</h2>
+								<h2 className='heading'>CREATE AN ACCOUNT</h2>
 								<p className='desc'>
-									Thật dễ dàng tạo một tài khoản. Hãy nhập địa chỉ email của bạn
-									và điền vào mẫu trên trang tiếp theo và tận hưởng những lợi
-									ích của việc sở hữu một tài khoản.
+									Creating an account is easy. Enter your email address and fill
+									in the form on the next page and enjoy the benefits of having
+									an account.
 								</p>
 								<div className='content'>
 									<ul>
 										<li>
 											<i className='fal fa-check'></i>
-											<span>
-												Tổng quan đơn giản về thông tin cá nhân của bạn
-											</span>
+											<span>Simple overview of your personal information</span>
 										</li>
 										<li>
 											<i className='fal fa-check'></i>
-											<span>Thanh toán nhanh hơn</span>
-										</li>
-										<li>
-											<i className='fal fa-check'></i>
-											<span>Ưu đãi và khuyến mãi độc quyền</span>
-										</li>
-										<li>
-											<i className='fal fa-check'></i>
-											<span>Các sản phẩm mới nhất</span>
+											<span>Faster checkout</span>
 										</li>
 										<li>
 											<i className='fal fa-check'></i>
 											<span>
-												Các bộ sưu tập giới hạn và bộ sưu tập theo mùa mới
+												A single global login to interact with adidas products
+												and services
 											</span>
 										</li>
 										<li>
 											<i className='fal fa-check'></i>
-											<span>Các sự kiện sắp tới</span>
+											<span>Exclusive offers and promotions</span>
+										</li>
+										<li>
+											<i className='fal fa-check'></i>
+											<span>Latest products arrivals</span>
+										</li>
+										<li>
+											<i className='fal fa-check'></i>
+											<span>Upcoming events</span>
+										</li>
+										<li>
+											<i className='fal fa-check'></i>
+											<span>New season and limited collections</span>
 										</li>
 									</ul>
 								</div>
-								{/* <Link
-									to='/register'
-									className='btn btn-register btn-table-mobile'
-								>
-									Đăng ký<i className='fas fa-arrow-right'></i>
-								</Link> */}
+
 								<Link to='/register'>
-									<Button text='Đăng kí' />
+									<Button text='Register' />
 								</Link>
 							</div>
 						</div>

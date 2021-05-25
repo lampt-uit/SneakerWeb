@@ -66,18 +66,22 @@ const productController = {
 	},
 	createProduct: async (req, res) => {
 		try {
-			const image = 'http://localhost:4000/' + req.file.path;
-			const { product_id, title, price, description, category } = req.body;
+			const image = [
+				'http://localhost:4000/' + req.files[0].path,
+				'http://localhost:4000/' + req.files[1].path
+			];
+			const { product_id, title, price, description, category, stock } =
+				req.body;
 
 			if (!image)
 				return res
 					.status(400)
-					.json({ message: 'No image upload. You need upload image' });
+					.json({ msg: 'No image upload. You need upload image' });
 
 			const product = await Products.findOne({ product_id });
 
 			if (product)
-				return res.status(400).json({ message: 'This product already exists' });
+				return res.status(400).json({ msg: 'This product already exists' });
 
 			const newProduct = new Products({
 				product_id,
@@ -85,13 +89,14 @@ const productController = {
 				price,
 				description,
 				image,
-				category
+				category,
+				stock
 			});
 			await newProduct.save();
 
-			res.json({ message: 'Created a New Product Successful' });
+			res.json({ msg: 'Created a New Product Successful' });
 		} catch (error) {
-			return res.status(500).json({ msg: error.message });
+			return res.status(500).json({ msg: error.msg });
 		}
 	},
 	deleteProduct: async (req, res) => {
@@ -104,8 +109,11 @@ const productController = {
 	},
 	updateProduct: async (req, res) => {
 		try {
-			const image = 'http://localhost:4000/' + req.file.path;
-			const { title, price, description, category } = req.body;
+			const image = [
+				'http://localhost:4000/' + req.files[0].path,
+				'http://localhost:4000/' + req.files[1].path
+			];
+			const { title, price, description, category, stock } = req.body;
 
 			if (!image)
 				return res
@@ -121,10 +129,10 @@ const productController = {
 					price,
 					description,
 					image,
-					category
+					category,
+					stock
 				}
 			);
-
 			res.json({ message: 'Product is updated successfully' });
 		} catch (error) {
 			return res.status(500).json({ msg: error.message });
