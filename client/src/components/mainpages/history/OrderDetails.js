@@ -29,56 +29,58 @@ function OrderDetails() {
 
 	return (
 		<div className='history-detail mrt mrb'>
-			<div className="grid wide">
-			<h1 className="history-title">Chi tiết đơn hàng</h1>
-			<table>
-				<tr>
-					<th>Tên người mua</th>
-					<th>Điện thoại</th>
-					<th>Địa chỉ nhận hàng</th>
-					<th>Ngày mua</th>
-					<th>Trạng thái đơn hàng</th>
-				</tr>
-				<tr>
-					<td >{detailOrder.name}</td>
-					<td>{detailOrder.phone}</td>
-					<td>{detailOrder.address}</td>
-					<td>{new Date(detailOrder.createdAt).toLocaleDateString()}</td>
-					<td style={style}>
-						{detailOrder.status ? 'Đã thanh toán' : 'Chưa thanh toán'}{' '}
-					</td>
-				</tr>
-			</table>
-
-			<table style={{ marginTop: '60px' }}>
-				<tr>
-					<th>Sản phẩm</th>
-					<th>Tên</th>
-					<th>Giá</th>
-					<th>Số lượng</th>
-					<th>Size</th>
-				</tr>
-
-				{detailOrder.cart.map((item) => (
-					<tr style={{ backgroundColor: 'white' }} className="tr-boder">
-						<td>
-							<img src={item.image[0]} alt='' />
-						</td>
-						<td className="td-name">{item.title}</td>
-						<td className="td-price">$ {item.price}</td>
-						<td>{item.count}</td>
-						<td>{item.sizesl}</td>
+			<div className='grid wide'>
+				<h1 className='history-title'>Order details</h1>
+				<table>
+					<tr>
+						<th>Buyer's name</th>
+						<th>Phone</th>
+						<th>Delivery address</th>
+						<th>Purchase date</th>
+						<th>Order status</th>
 					</tr>
-				))}
-				<tr>
-					<td colSpan='4' style={{ fontSize: '20px', fontWeight: 700 }} className="heading-payment">
-						Tổng thanh toán
-					</td>
-					<td style={{ fontSize: '22px', fontWeight: 700, color: 'crimson' }}>
-						$ {total}
-					</td>
-				</tr>
-			</table>
+					<tr>
+						<td>{detailOrder.name}</td>
+						<td>{detailOrder.phone}</td>
+						<td>{detailOrder.address}</td>
+						<td>{new Date(detailOrder.createdAt).toLocaleDateString()}</td>
+						<td style={style}>{detailOrder.status ? 'Paid' : 'Unpaid'} </td>
+					</tr>
+				</table>
+
+				<table style={{ marginTop: '60px' }}>
+					<tr>
+						<th>Product</th>
+						<th>Title</th>
+						<th>Price</th>
+						<th>Amount</th>
+						<th>Size</th>
+					</tr>
+
+					{detailOrder.cart.map((item) => (
+						<tr style={{ backgroundColor: 'white' }} className='tr-boder'>
+							<td>
+								<img src={item.image[0]} alt='' />
+							</td>
+							<td className='td-name'>{item.title}</td>
+							<td className='td-price'>$ {item.price}</td>
+							<td>{item.count}</td>
+							<td>{item.sizesl}</td>
+						</tr>
+					))}
+					<tr>
+						<td
+							colSpan='4'
+							style={{ fontSize: '20px', fontWeight: 700 }}
+							className='heading-payment'
+						>
+							Total payment
+						</td>
+						<td style={{ fontSize: '22px', fontWeight: 700, color: 'crimson' }}>
+							$ {total}
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	);

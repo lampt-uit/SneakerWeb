@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-
 import Button from '../Button/Button';
 import './Modal.css';
 import { isEmail, isEmpty } from '../Validation/Validation';

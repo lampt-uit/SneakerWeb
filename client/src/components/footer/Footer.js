@@ -1,7 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
 import './Footer.css';
 const Footer = () => {
+	const [status, setStatus] = useState({ err: '', success: '' });
+	const formik = useFormik({
+		initialValues: {
+			email: ''
+		},
+		validationSchema: Yup.object({
+			email: Yup.string()
+				.trim()
+				.email('Email invalid')
+				.required('Please enter this field.')
+		}),
+		onSubmit: async (values, { resetForm }) => {
+			try {
+				const res = await axios.post('/user/email_subscribe', values);
+				setStatus({ ...status, err: '', success: res.data.msg });
+				resetForm();
+			} catch (error) {
+				error.response.data.msg &&
+					setStatus({ ...status, err: error.response.data.msg, success: '' });
+			}
+		}
+	});
 	return (
 		<div className='footer'>
 			<div className='grid wide footer-top'>
@@ -9,7 +34,7 @@ const Footer = () => {
 					<div className='col l-8'>
 						<div className='row'>
 							<div className='col l-4'>
-								<h2 className='footer-title'>Về chúng tôi</h2>
+								<h2 className='footer-title'>About Us</h2>
 								<ul className='footer-list'>
 									<li className='footer-item'>
 										<Link to='#' className='footer-link'>
@@ -34,31 +59,41 @@ const Footer = () => {
 								</ul>
 							</div>
 							<div className='col l-4'>
-								<h2 className='footer-title'>Liên lạc chúng tôi</h2>
+								<h2 className='footer-title'>Contact Us</h2>
 								<ul className='footer-list'>
 									<li className='footer-item'>
 										<Link to='#' className='footer-link'>
-											Ktx Khu A
+											KTX Khu A - Đông Hòa - Dĩ An
 										</Link>
 									</li>
 									<li className='footer-item'>
 										<Link to='#' className='footer-link'>
-											Tổng đài: 0324-xxx-xxx
+											0324-xxx-xxx
 										</Link>
 									</li>
 								</ul>
 							</div>
 							<div className='col l-4'>
-								<h2 className='footer-title'>Tại sao chọn Vatino</h2>
+								<h2 className='footer-title'>Why choose Vatino ?</h2>
 								<ul className='footer-list'>
 									<li className='footer-item'>
 										<Link to='#' className='footer-link'>
-											Miễn phí giao hàng
+											Free Ship
 										</Link>
 									</li>
 									<li className='footer-item'>
 										<Link to='#' className='footer-link'>
-											Thẻ thành viên
+											Membership card
+										</Link>
+									</li>
+									<li className='footer-item'>
+										<Link to='#' className='footer-link'>
+											Promotion policy
+										</Link>
+									</li>
+									<li className='footer-item'>
+										<Link to='#' className='footer-link'>
+											Exchange policy
 										</Link>
 									</li>
 								</ul>
@@ -66,18 +101,26 @@ const Footer = () => {
 						</div>
 					</div>
 					<div className='col l-4'>
-						<h2 className='footer-title'>Đăng ký nhận ưu đãi qua Email</h2>
-						<form>
+						<h2 className='footer-title'>
+							Subscribe to receive a promotion through email{' '}
+						</h2>
+						<form onSubmit={formik.handleSubmit}>
 							<div className=''>
 								<input
 									id='email'
 									name='email'
 									type='text'
-									placeholder='Your email'
+									placeholder='Please enter your email'
 									className='form-control'
+									onChange={formik.handleChange}
+									value={formik.values.email}
 								/>
+								<br />
+								{formik.errors.email && formik.touched.email && (
+									<span className='form-message'>{formik.errors.email}</span>
+								)}
 							</div>
-							<button className='btn-confirm'>XÁC NHẬN</button>
+							<button className='btn-confirm'>Subscribe</button>
 						</form>
 					</div>
 				</div>
@@ -96,10 +139,10 @@ const Footer = () => {
 
 				<div className='policy'>
 					<Link to='#' className='policy-link'>
-						Điều khoản và Điều Kiện
+						Terms and condition
 					</Link>
 					<Link to='#' className='policy-link'>
-						Chính sách bảo mật
+						Privacy Policy
 					</Link>
 				</div>
 			</div>

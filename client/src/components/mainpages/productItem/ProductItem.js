@@ -10,9 +10,14 @@ function ProductItem({ product }) {
 	return (
 		<div className='col l-3 m-6 c-12'>
 			<div className='card-container'>
-				<Link to={`/product/${product._id}`} className='card-link'>
-					<img src={product.image[0]} alt='' className='card-link-img' />
-				</Link>
+				{product.stock ? (
+					<Link to={`/product/${product._id}`} className='card-link'>
+						<img src={product.image[0]} alt='' className='card-link-img' />
+					</Link>
+				) : (
+					<img src={product.image[0]} alt='' className='card-link-img-dis' />
+				)}
+
 				<div className='card-detail'>
 					<div className='row1'>
 						<div className='card-item_title'>{product.title}</div>
@@ -24,9 +29,17 @@ function ProductItem({ product }) {
 							<Rating rating={product.rating} />
 							<div className='reviews_qty'>{product.numReviews} reviews</div>
 						</div>
-						<Link to='#' onClick={() => addToCart(product._id)} className='buy'>
-							Mua ngay
-						</Link>
+						{product.stock ? (
+							<Link
+								to='#'
+								onClick={() => addToCart(product._id)}
+								className='buy'
+							>
+								Buy Now
+							</Link>
+						) : (
+							<p style={{ color: 'crimson' }}>Out of stock</p>
+						)}
 					</div>
 				</div>
 			</div>

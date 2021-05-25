@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { GlobalState } from '../../../GlobalState';
 import './Product.css';
@@ -7,6 +7,7 @@ import ProductItem from '../productItem/ProductItem';
 import Pagination from '../pagination/Pagination';
 function Product() {
 	const state = useContext(GlobalState);
+	const history = useHistory();
 	const [products] = state.productAPI.products;
 	// const [category, setCategory] = state.productAPI.category;
 	const [sort, setSort] = state.productAPI.sort;
@@ -20,12 +21,12 @@ function Product() {
 			<div className='home_product mrt mrb'>
 				<div className='grid wide'>
 					<div className='breadcrumb'>
-						<Link to='#'>
+						<Link to='#' onClick={() => history.goBack()}>
 							<i className='fas fa-arrow-left'></i>
-							Trở lại
+							Back
 						</Link>
 						<Link to='/' onClick={() => handleReset()}>
-							Trang Chủ
+							Home
 						</Link>
 					</div>
 					<div className='reset_sort_search'>
@@ -36,7 +37,7 @@ function Product() {
 						</button>
 					</div>
 					<div className='home_filter'>
-						<span className='home_filter_label'>Sắp xếp theo </span>
+						<span className='home_filter_label'>Sort by </span>
 						<button
 							style={{
 								border: sort === 'sort=updatedAt' ? '1px solid black' : ''
@@ -44,7 +45,7 @@ function Product() {
 							className='home_filter-button'
 							onClick={() => setSort('sort=updatedAt')}
 						>
-							Mới nhất
+							Newest
 						</button>
 						<button
 							style={{
@@ -53,7 +54,7 @@ function Product() {
 							className='home_filter-button'
 							onClick={() => setSort('sort=-sold')}
 						>
-							Bán chạy
+							Selling
 						</button>
 						<button
 							style={{
@@ -62,7 +63,7 @@ function Product() {
 							className='home_filter-button'
 							onClick={() => setSort('sort=-numReviews')}
 						>
-							Phổ biến
+							Popular
 						</button>
 
 						<select
@@ -70,9 +71,9 @@ function Product() {
 							value={sort}
 							onChange={(e) => setSort(e.target.value)}
 						>
-							<option value=''>Giá</option>
-							<option value='sort=-price'>Cao tới thấp</option>
-							<option value='sort=price'>Thấp tới cao</option>
+							<option value=''>Price</option>
+							<option value='sort=-price'>High - Low</option>
+							<option value='sort=price'>Low - High</option>
 						</select>
 					</div>
 					<div className='row sm-gutter'>

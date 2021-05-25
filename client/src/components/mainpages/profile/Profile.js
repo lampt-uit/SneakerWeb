@@ -28,14 +28,14 @@ function Profile() {
 			address: userInfo.address || ''
 		},
 		validationSchema: Yup.object({
-			name: Yup.string().required('Vui lòng nhập trường này'),
+			name: Yup.string().required('Please enter this field.'),
 			phone: Yup.number()
 				.typeError("That doesn't look like a phone number")
 				.positive("A phone number can't start with a minus")
 				.integer("A phone number can't include a decimal point")
 				.min(8)
 				.required('A phone number is required'),
-			address: Yup.string().required('Vui lòng nhập trường này')
+			address: Yup.string().required('Please enter this field.')
 		}),
 		onSubmit: async (values) => {
 			try {
@@ -69,14 +69,14 @@ function Profile() {
 		},
 		validationSchema: Yup.object({
 			password: Yup.string()
-				.min(6, 'Vui lòng nhập tối thiểu 6 ký tự')
-				.required('Vui lòng nhập trường này'),
+				.min(6, 'Please enter at least 6 characters.')
+				.required('Please enter this field.'),
 			new_password: Yup.string()
-				.min(6, 'Vui lòng nhập tối thiểu 6 ký tự')
-				.required('Vui lòng nhập trường này'),
+				.min(6, 'Please enter at least 6 characters.')
+				.required('Please enter this field.'),
 			password_confirmation: Yup.string()
-				.oneOf([Yup.ref('new_password')], 'Mật khẩu nhập lại không chính xác')
-				.required('Vui lòng nhập trường này!')
+				.oneOf([Yup.ref('new_password')], 'Re-entered password is incorrect.')
+				.required('Please enter this field.')
 		}),
 		onSubmit: async (values, { resetForm }) => {
 			try {
@@ -112,7 +112,7 @@ function Profile() {
 										className='user-page-avatar-img'
 									/>
 									<div className='info'>
-										<p className=''>Tài khoản của</p>
+										<p className=''>Account of</p>
 										<strong>{userInfo.name}</strong>
 									</div>
 								</div>
@@ -122,14 +122,14 @@ function Profile() {
 										onClick={() => toggleTab(1)}
 									>
 										<i class='fas fa-user'></i>
-										<span>Thông tin tài khoản</span>
+										<span>Account information</span>
 									</button>
 									<button
 										className={toggle === 2 ? 'tabs active-tabs' : 'tabs'}
 										onClick={() => toggleTab(2)}
 									>
 										<i class='fas fa-unlock'></i>
-										<span>Đặt lại mật khẩu</span>
+										<span>Change password</span>
 									</button>
 								</div>
 							</div>
@@ -141,13 +141,13 @@ function Profile() {
 								}
 							>
 								<div className='tabs-heading'>
-									<p>Thông tin tài khoản</p>
+									<p>Account Information</p>
 								</div>
 								<div className='my-account'>
 									<form className='form-profile' onSubmit={formik.handleSubmit}>
 										<div className='form-group-profile'>
 											<label htmlFor='name' className='label'>
-												Họ và tên
+												Full name
 											</label>
 											<div className='form-group-input'>
 												<input
@@ -166,7 +166,11 @@ function Profile() {
 										</div>
 										<div className='form-group-profile'>
 											<label htmlFor='email' className='label'>
-												Email của bạn
+												Your email{' '}
+												<span style={{ color: 'crimson', fontSize: '10px' }}>
+													{' '}
+													* Not change
+												</span>
 											</label>
 											<div className='form-group-input'>
 												<input
@@ -180,7 +184,7 @@ function Profile() {
 										</div>
 										<div className='form-group-profile'>
 											<label htmlFor='phone' className='label'>
-												Số điện thoại
+												Phone
 											</label>
 											<div className='form-group-input'>
 												<input
@@ -199,7 +203,7 @@ function Profile() {
 										</div>
 										<div className='form-group-profile'>
 											<label htmlFor='address' className='label'>
-												Địa chỉ
+												Address
 											</label>
 											<div className='form-group-input'>
 												<input
@@ -216,7 +220,7 @@ function Profile() {
 												)}
 											</div>
 										</div>
-										<Button text='Cập nhật' />
+										<Button text='Update' />
 									</form>
 								</div>
 							</div>
@@ -227,7 +231,7 @@ function Profile() {
 								}
 							>
 								<div className='tabs-heading'>
-									<p>Đặt lại mật khẩu</p>
+									<p>Change password</p>
 								</div>
 								<div className='my-account'>
 									<form
@@ -237,13 +241,14 @@ function Profile() {
 										{err && showErrMsg(err)}
 										<div className='form-group-profile'>
 											<label htmlFor='password' className='label'>
-												Mật khẩu hiện tại
+												Current password
 											</label>
 											<div className='form-group-input'>
 												<input
 													id='password'
 													name='password'
 													type='password'
+													placeholder='Please enter current password'
 													onChange={formik2.handleChange}
 													value={formik2.values.password}
 												/>
@@ -257,13 +262,14 @@ function Profile() {
 										</div>
 										<div className='form-group-profile'>
 											<label htmlFor='new_password' className='label'>
-												Mật khẩu mới
+												New password
 											</label>
 											<div className='form-group-input'>
 												<input
 													id='new_password'
 													name='new_password'
 													type='password'
+													placeholder='Please enter new password'
 													onChange={formik2.handleChange}
 													value={formik2.values.new_password}
 												/>
@@ -277,12 +283,13 @@ function Profile() {
 										</div>
 										<div className='form-group-profile'>
 											<label htmlFor='password_confirmation' className='label'>
-												Nhập lại mật khẩu
+												Confirm new password
 											</label>
 											<div className='form-group-input'>
 												<input
 													id='password_confirmation'
 													name='password_confirmation'
+													placeholder='Please enter new password again'
 													type='password'
 													onChange={formik2.handleChange}
 													value={formik2.values.password_confirmation}
@@ -295,7 +302,7 @@ function Profile() {
 													)}
 											</div>
 										</div>
-										<Button text='Cập nhật' />
+										<Button text='Update' />
 									</form>
 								</div>
 							</div>

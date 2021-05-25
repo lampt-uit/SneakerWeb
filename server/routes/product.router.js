@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 		cb(null, '.\\uploads\\');
 	},
 	filename: function (req, file, cb) {
-		cb(null, file.originalname);
+		cb(null, Date.now() + '-' + file.originalname);
 	}
 });
 const upload = multer({
@@ -33,13 +33,13 @@ const authAdmin = require('../middlewares/authAdmin');
 router.route('/products').get(productController.getProducts).post(
 	// auth,
 	// authAdmin,
-	upload.single('image'),
+	upload.array('image'),
 	productController.createProduct
 );
 router
 	.route('/product/:id')
 	.get(productController.getProduct)
 	.delete(productController.deleteProduct)
-	.put(upload.single('image'), productController.updateProduct);
+	.patch(upload.array('image'), productController.updateProduct);
 
 module.exports = router;
