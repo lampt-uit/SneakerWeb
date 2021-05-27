@@ -83,7 +83,7 @@ function DetailProduct() {
 										</div>
 									</div>
 									<div className='relate-thumb'>
-										<h1>Relate Product</h1>
+										<h1 className='title'>Relate Product</h1>
 										<div>
 											{products.map((product_) => {
 												return product_.category === product.category &&
@@ -103,7 +103,7 @@ function DetailProduct() {
 										</h2>
 									) : (
 										<>
-											<h1 style={{ marginTop: '50px' }}>Reviews</h1>
+											<h1 className='title' style={{ marginTop: '50px' }}>Reviews</h1>
 											<div className='reviews'>
 												<input type='radio' name='rate' id='rd-5' />
 												<label htmlFor='rd-5' className='fas fa-star'></label>

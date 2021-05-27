@@ -44,7 +44,7 @@ function ForgotPassword() {
 			<div className='forgot mrt mrb'>
 				<div className='grid wide'>
 					<div className='row'>
-						<div className='col l-6'>
+						<div className='col l-12'>
 							<form
 								action=''
 								className='form-forgot'
@@ -95,9 +95,6 @@ function ForgotPassword() {
 
 								<Button text='Update' />
 							</form>
-						</div>
-						<div className='col l-6'>
-							<h1>This is my reset password page</h1>
 						</div>
 					</div>
 				</div>

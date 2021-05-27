@@ -125,7 +125,7 @@ function AdminProducts() {
 	return (
 		<>
 			{status.success && <Toast type='success' msg={status.success} />}
-			<div className='admin-products'>
+			<div className='admin-products mrt mrb'>
 				<h1>Product Management</h1>
 				<div className='grid wide'>
 					<div className='row'>

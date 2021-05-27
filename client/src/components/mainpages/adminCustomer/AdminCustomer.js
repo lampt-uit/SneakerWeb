@@ -141,7 +141,7 @@ function AdminCustomer() {
 	return (
 		<>
 			{status.success && <Toast type='success' msg={status.success} />}
-			<div className='admin-customers'>
+			<div className='admin-customers mrt mrb'>
 				<h1>Customer Management</h1>
 				<div className='grid wide'>
 					<div className='row'>

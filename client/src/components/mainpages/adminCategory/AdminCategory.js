@@ -77,7 +77,7 @@ function AdminCategory() {
 			{err && <Toast type='err' msg={err} />}
 			{success && <Toast type='success' msg={success} />}
 
-			<div className='admin-category'>
+			<div className='admin-category mrt mrb'>
 				<h1>Category Management</h1>
 				<div className='grid wide'>
 					<div className='row'>

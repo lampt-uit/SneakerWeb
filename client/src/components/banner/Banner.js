@@ -1,5 +1,5 @@
 import React from 'react';
-import video from '../../public/video/videoBanner.mp4';
+import VideoBanner from '../../public/video/Banner.mp4'
 import { Link } from 'react-router-dom';
 import Button from '../../components/mainpages/utils/Button/Button';
 import './Banner.css';
@@ -7,7 +7,7 @@ function Banner() {
 	return (
 		<div className='container'>
 			<video autoPlay loop muted>
-				<source src={video} type='video/mp4' />
+				<source src={VideoBanner} type='video/mp4' />
 			</video>
 			<div className='content'>
 				<img
