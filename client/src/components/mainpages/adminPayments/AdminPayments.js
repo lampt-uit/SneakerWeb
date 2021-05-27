@@ -69,15 +69,24 @@ function AdminPayments() {
 	return (
 		<>
 			{status.success && <Toast type='success' msg={status.success} />}
-			<div className='admin-payments'>
+			<div className='admin-payments mrt mrb'>
 				<h1>Orders Management</h1>
 				<div className='grid wide'>
 					<div className='row'>
 						<div className='col l-3'>
-							<div className='info'>
-								<div>Total Paymnents {payments.length}</div>
-								<div>Unpaid Paymnents {unPaid.length}</div>
-								<div>Paid Paymnents {paid.length}</div>
+							<div className="row">
+								<div className="col l-12 result">
+									<span className="title1">Total Paymnents</span>
+									<p className="text">{payments.length}</p>
+								</div>
+								<div className="col l-12 result">
+									<span className="title1">Unpaid Paymnents</span>
+									<p className="text">{unPaid.length}</p>
+								</div>
+								<div className="col l-12 result">
+									<span className="title1">Paid Paymnents</span>
+									<p className="text">{paid.length}</p>
+								</div>
 							</div>
 						</div>
 						<div className='col l-9'>
@@ -105,12 +114,7 @@ function AdminPayments() {
 												{' '}
 												{item.status ? 'Paid' : 'Unpaid'}{' '}
 												{item.status === false ? (
-													<button
-														style={{
-															padding: '3px',
-															backgroundColor: '#ee5253',
-															borderRadius: '5px'
-														}}
+													<button className="btn-paid"
 														onClick={() => handlePaid(item._id)}
 													>
 														Paid

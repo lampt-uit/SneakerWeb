@@ -41,7 +41,7 @@ function ResetPassword() {
 							className='form-reset'
 							onSubmit={formik.handleSubmit}
 						>
-							<h2 className='heading-forgot'>Please enter your email</h2>
+							<h2 className='heading-reset'>Please enter your email</h2>
 							{err && showErrMsg(err)}
 							{success && showSuccessMsg(success)}
 							<div className='form-group'>
@@ -66,8 +66,24 @@ function ResetPassword() {
 						</form>
 					</div>
 					<div className='col l-6'>
-						<h1>BẠN QUÊN MẬT KHẨU ?</h1>
-						<p>Thật dễ dàng để reset mật khẩu của một tài khoản. Hãy nhập địa chỉ email của bạn để được đặt lại mật khẩu</p>		
+						<div className='reason reason-reset'>
+							<h1 className='heading-reset'>YOU FORGET YOUR PASSWORD ?</h1>
+							<p className='description'>It's easy to reset an account's password. Please enter your email address to reset your password</p>		
+							<div className='content'>
+									<ul>
+										<li>
+											<i className='fal fa-check'></i>
+											<span>Easy and faster</span>
+										</li>
+										<li>
+											<i className='fal fa-check'></i>
+											<span>
+												Facility
+											</span>
+										</li>
+									</ul>
+								</div>
+						</div>
 					</div>
 				</div>
 			</div>

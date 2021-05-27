@@ -42,7 +42,8 @@ const Header = () => {
 								<img src={userInfo.avatar} alt='/' />
 								&nbsp;
 								<span className='name'>
-									{userInfo.name} <i className='fas fa-angle-down'></i>
+									<span>{userInfo.name}</span>
+									<i className='fas fa-angle-down'></i>
 								</span>
 							</Link>
 							<ul className='dropdown'>
@@ -83,7 +84,7 @@ const Header = () => {
 					) : (
 						<>
 							{' '}
-							<li>
+							<li className="header-login">
 								<Link to='/login'>Login</Link>
 							</li>
 							<li>
@@ -100,7 +101,7 @@ const Header = () => {
 					onClick={() => handleReset()}
 				>
 					{userInfo.role ? (
-						<h1 style={{ marginLeft: '20px' }}>ADMIN</h1>
+						<h1>ADMIN</h1>
 					) : (
 						<img src={Logo} alt='' width='100' />
 					)}
