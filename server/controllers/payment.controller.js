@@ -66,7 +66,7 @@ const paymentController = {
 				}
 			);
 
-			res.json({ msg: 'Status Payments is updated successful' });
+			res.json({ msg: 'Status Payment is updated successful' });
 		} catch (error) {
 			return res.status(500).json({ msg: error.message });
 		}
@@ -74,7 +74,7 @@ const paymentController = {
 	deletePayment: async (req, res) => {
 		try {
 			await Payments.findByIdAndDelete(req.params.id);
-			res.json({ msg: 'Product has been deleted successful' });
+			res.json({ msg: 'Payment has been deleted successful' });
 		} catch (error) {
 			return res.status(500).json({ msg: error.message });
 		}
