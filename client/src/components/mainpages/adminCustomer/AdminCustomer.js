@@ -6,6 +6,7 @@ import { GlobalState } from '../../../GlobalState';
 import Toast from '../utils/Toast/Toast';
 import { showErrMsg } from '../utils/Notification/Notification';
 import Button from '../utils/Button/Button';
+import { isEmail, isEmpty, isPhone } from '../utils/Validation/Validation';
 
 function AdminCustomer() {
 	const [callback, setCallback] = useState(false);
@@ -20,6 +21,7 @@ function AdminCustomer() {
 		address: '',
 		phone: ''
 	});
+	const { name, email, address, phone } = user;
 	const [id, setID] = useState('');
 	const [onEdit, setOnEdit] = useState(false);
 
@@ -55,6 +57,24 @@ function AdminCustomer() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (isEmpty(name) || isEmpty(phone) || isEmpty(address) || isEmpty(email))
+			return setStatus({
+				...status,
+				err: 'Please fill in all fields.',
+				success: ''
+			});
+		if (!isPhone(phone))
+			return setStatus({
+				...status,
+				err: 'Please enter the correct phone number',
+				success: ''
+			});
+		if (!isEmail(email))
+			return setStatus({
+				...status,
+				err: 'Please enter the correct email format',
+				success: ''
+			});
 		try {
 			if (!onEdit) {
 				const res = await axios.post(
