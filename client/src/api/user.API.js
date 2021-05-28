@@ -72,7 +72,7 @@ const UserAPI = (token) => {
 			setCart([...cart, ...data]);
 			setCallback(!callback);
 		} else {
-			alert('Sản phẩm đã có trong giỏ hàng.');
+			alert('Products already in the cart.');
 		}
 	};
 
