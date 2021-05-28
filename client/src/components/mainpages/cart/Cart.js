@@ -282,7 +282,7 @@ function Cart() {
 										</span>
 									</p>
 									<p>
-										Delivery method:
+										Delivery method:{' '}
 										<span
 											style={{
 												color: 'crimson',
@@ -294,7 +294,7 @@ function Cart() {
 										</span>{' '}
 									</p>
 									<p>
-										Promotion:
+										Promotion:{' '}
 										<span
 											style={{
 												color: 'crimson',
@@ -306,7 +306,7 @@ function Cart() {
 										</span>{' '}
 									</p>
 									<h2>
-										Total amount:
+										Total amount:{' '}
 										<span
 											style={{
 												color: 'crimson',

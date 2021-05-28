@@ -7,6 +7,7 @@ import { GlobalState } from '../../../GlobalState';
 import Toast from '../utils/Toast/Toast';
 import Button from '../utils/Button/Button';
 import { showErrMsg } from '../utils/Notification/Notification';
+import { isEmpty } from '../utils/Validation/Validation';
 
 function AdminProducts() {
 	const state = useContext(GlobalState);
@@ -24,6 +25,7 @@ function AdminProducts() {
 		category: '',
 		image: ''
 	});
+	const { product_id, title, description, price, stock, category } = product;
 	const [files, setFiles] = useState();
 	const [id, setID] = useState('');
 	const [onEdit, setOnEdit] = useState(false);
@@ -40,10 +42,22 @@ function AdminProducts() {
 				setStatus({ ...status, success: '', err: error.response.data.msg });
 		}
 	};
-	console.log(status);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (
+			isEmpty(product_id) ||
+			isEmpty(title) ||
+			isEmpty(description) ||
+			isEmpty(price) ||
+			isEmpty(stock) ||
+			isEmpty(category)
+		)
+			return setStatus({
+				...status,
+				err: 'Please fill in all fields.',
+				success: ''
+			});
 		try {
 			if (!onEdit) {
 				const data = new FormData();

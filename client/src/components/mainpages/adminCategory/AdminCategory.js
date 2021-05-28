@@ -6,6 +6,7 @@ import { GlobalState } from '../../../GlobalState';
 import Button from '../utils/Button/Button';
 import { showErrMsg } from '../utils/Notification/Notification';
 import Toast from '../utils/Toast/Toast';
+import { isEmpty } from '../utils/Validation/Validation';
 
 function AdminCategory() {
 	const state = useContext(GlobalState);
@@ -20,6 +21,12 @@ function AdminCategory() {
 
 	const createCategory = async (e) => {
 		e.preventDefault();
+		if (isEmpty(category))
+			return setStatus({
+				...status,
+				err: 'Please fill in all fields.',
+				success: ''
+			});
 		try {
 			if (!onEdit) {
 				const res = await axios.post(
@@ -92,7 +99,7 @@ function AdminCategory() {
 									<input
 										type='text'
 										name='category'
-										required
+										// required
 										value={category}
 										onChange={(e) => setCategory(e.target.value)}
 										class='form-control'
