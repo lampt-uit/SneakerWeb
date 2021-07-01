@@ -1,5 +1,5 @@
 import Header from './components/header/Header';
-import Footer from './components/footer/Footer';
+
 import MainPages from './components/mainpages/Pages';
 import ButtonToTop from './components/mainpages/utils/ButtonToTop/ButtonToTop';
 import { DataProvider } from './GlobalState';
@@ -13,7 +13,7 @@ function App() {
 					<Header />
 					<MainPages />
 					<ButtonToTop />
-					<Footer />
+			
 				</div>
 			</Router>
 		</DataProvider>
