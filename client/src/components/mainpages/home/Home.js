@@ -1,152 +1,174 @@
-import React, { useState, useEffect } from 'react';
-import Banner from '../../banner/Banner';
-import Slider from 'react-slick';
-import './Home.css';
-import Carousel from '../utils/Carousel/Carousel';
-import axios from 'axios';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import axios from "axios";
+import "../auth/Login.css";
+import { showErrMsg, showSuccessMsg } from "../utils/Notification/Notification";
+import Button from "../utils/Button/Button";
 
-import ImgGirl from '../../../public/images/girl.jpg';
-import ImgMen from '../../../public/images/man.jpg';
-import ImgKid from '../../../public/images/kid.jpg';
-
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 const Home = () => {
-	var settings = {
-		dots: true,
-		infinite: false,
-		speed: 500,
-		slidesToShow: 5,
-		slidesToScroll: 5,
-		initialSlide: 0,
-		responsive: [
-			{
-				breakpoint: 1024,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 3,
-					infinite: true,
-					dots: true
-				}
-			},
-			{
-				breakpoint: 600,
-				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 2,
-					initialSlide: 2
-				}
-			},
-			{
-				breakpoint: 480,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1
-				}
-			}
-		]
-	};
+    const [state, setState] = useState({ err: "", success: "" });
+    const { err, success } = state;
 
-	const [sold, setSold] = useState([]);
-	const [rating, setRating] = useState([]);
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+        },
+        validationSchema: Yup.object({
+            email: Yup.string()
+                .trim()
+                .email("Email invalid")
+                .required("Please enter this field."),
+            password: Yup.string()
+                .min(6, "Please enter at least 6 characters.")
+                .required("Please enter this field."),
+        }),
+        onSubmit: async (values, { resetForm }) => {
+            try {
+                const res = await axios.post("/user/login", { ...values });
+                // console.log(res);
+                setState({ err: "", success: res.data.message });
+                localStorage.setItem("firstLogin", true);
+                window.location.href = "/";
+                resetForm();
+            } catch (error) {
+                // console.log(error.response);
+                error.response.data.message &&
+                    setState({ err: error.response.data.message, success: "" });
+            }
+        },
+    });
 
-	useEffect(() => {
-		const getProducts = async () => {
-			const res = await axios.get(`/api/products?limit=10&page=1&sort=-sold`);
-			// console.log(res);
-			setSold(res.data.products);
-		};
-		getProducts();
-	}, []);
+    return (
+        <div>
+            <div className="login mrt mrb">
+                <div className="grid wide">
+                    <div className="row app-content">
+                        <div className="col l-6 m-12 c-12">
+                            <form
+                                className="form"
+                                onSubmit={formik.handleSubmit}
+                            >
+                                <h2 className="heading">Log In</h2>
+                                {err && showErrMsg(err)}
+                                {success && showSuccessMsg(success)}
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="email"
+                                        className="form-label"
+                                    >
+                                        Email
+                                    </label>
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="text"
+                                        placeholder="kimthang@gmail.com"
+                                        className="form-control"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.email}
+                                    />
+                                    {formik.errors.email &&
+                                        formik.touched.email && (
+                                            <span className="form-message">
+                                                {formik.errors.email}
+                                            </span>
+                                        )}
+                                </div>
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="password"
+                                        className="form-label"
+                                    >
+                                        Password
+                                    </label>
+                                    <input
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                        placeholder="*******"
+                                        className="form-control"
+                                        onChange={formik.handleChange}
+                                        value={formik.values.password}
+                                    />
+                                    {formik.errors.password &&
+                                        formik.touched.password && (
+                                            <span className="form-message">
+                                                {formik.errors.password}
+                                            </span>
+                                        )}
+                                </div>
+                                <Button text="Log In" />
+                            </form>
+                        </div>
+                        <div className="col l-6 m-12 c-12">
+                            <div className="reason">
+                                <h2 className="heading">CREATE AN ACCOUNT</h2>
+                                <p className="desc">
+                                    Creating an account is easy. Enter your
+                                    email address and fill in the form on the
+                                    next page and enjoy the benefits of having
+                                    an account.
+                                </p>
+                                <div className="content">
+                                    <ul>
+                                        <li>
+                                            <i className="fal fa-check"></i>
+                                            <span>
+                                                Simple overview of your personal
+                                                information
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <i className="fal fa-check"></i>
+                                            <span>Faster checkout</span>
+                                        </li>
+                                        <li>
+                                            <i className="fal fa-check"></i>
+                                            <span>
+                                                A single global login to
+                                                interact with adidas products
+                                                and services
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <i className="fal fa-check"></i>
+                                            <span>
+                                                Exclusive offers and promotions
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <i className="fal fa-check"></i>
+                                            <span>
+                                                Latest products arrivals
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <i className="fal fa-check"></i>
+                                            <span>Upcoming events</span>
+                                        </li>
+                                        <li>
+                                            <i className="fal fa-check"></i>
+                                            <span>
+                                                New season and limited
+                                                collections
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
 
-	useEffect(() => {
-		const getProducts = async () => {
-			const res = await axios.get(`/api/products?limit=10&page=1&sort=-rating`);
-			// console.log(res);
-
-			setRating(res.data.products);
-		};
-		getProducts();
-	}, []);
-
-	return (
-		<div>
-			<Banner />
-			<div className='home-content'>
-				<div className='grid wide'>
-					<div className='home-sale'>
-						<div className='home-title'>Sale products</div>
-
-						<Slider {...settings}>
-							{sold.map((sold_) => (
-								<div>
-									<Carousel
-										image={sold_.image[0]}
-										title={sold_.title}
-										price={`$ ${sold_.price}`}
-									/>
-								</div>
-							))}
-						</Slider>
-					</div>
-					<div className='home-sale'>
-						<div className='home-title'>Best products</div>
-
-						<Slider {...settings}>
-							{rating.map((rating_) => (
-								<div>
-									<Carousel
-										image={rating_.image[0]}
-										title={rating_.title}
-										price={`$ ${rating_.price}`}
-									/>
-								</div>
-							))}
-						</Slider>
-					</div>
-
-					<div className='home-age'>
-						<h2 className='home-title'>Who are you shopping for?</h2>
-						<div className='row'>
-							<div className='col l-4'>
-								<div className='card'>
-									<div className='card-img'>
-										<div className='card-bg'></div>
-										<img src={ImgGirl} alt='' />
-									</div>
-									<div className='card-title'>
-										<p>WOMEN</p>
-									</div>
-								</div>
-							</div>
-							<div className='col l-4'>
-								<div className='card'>
-									<div className='card-img'>
-										<div className='card-bg'></div>
-										<img src={ImgMen} alt='' />
-									</div>
-									<div className='card-title'>
-										<p>MEN</p>
-									</div>
-								</div>
-							</div>
-							<div className='col l-4'>
-								<div className='card'>
-									<div className='card-img'>
-										<div className='card-bg'></div>
-										<img src={ImgKid} alt='' />
-									</div>
-									<div className='card-title'>
-										<p>KIDS</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+                                <Link to="/register">
+                                    <Button text="Register" />
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 export default Home;
